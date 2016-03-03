@@ -1,5 +1,6 @@
 package bus.service.dao;
 
+import bus.service.beans.Route;
 import bus.service.db.ColumnNames;
 import bus.service.db.Queries;
 import bus.service.beans.RouteStop;
@@ -50,6 +51,10 @@ public class RouteStopDao {
                 return routeStop;
             }
         }, id);
+    }
+
+    public List<RouteStop> getRouteStopsByRoute(Route route) throws SQLException {
+        return null;
     }
 
     public void deleteRouteStopById(long id) throws SQLException {

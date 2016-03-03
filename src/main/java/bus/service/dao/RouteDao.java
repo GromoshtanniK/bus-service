@@ -48,6 +48,12 @@ public class RouteDao {
         }, id);
     }
 
+    public Route getRouteByRouteNumber(int routeNumber) throws SQLException {
+        Route route = new Route();
+        route.setRouteNumber(routeNumber);
+        return route;
+    }
+
     public void deleteRouteById(long id) throws SQLException {
         queryRunner.update(Queries.DELETE_ROUTE_BY_ID, id);
     }
