@@ -8,5 +8,7 @@ public final class Path {
     public static final String REGISTRATION_JSP = "/WEB-INF/jsp/registration.jsp";
     public static final String SUCCESSFUL_REGISTRATION_JSP = "/WEB-INF/jsp/successful_registration.jsp";
     public static final String PROFILE_SERVLET = "/profile";
-    public static final String INDEX_SERVLET = "/";
+    public static final String ROOT = "/";
+    public static final String INDEX_SERVLET = "/indexServlet";
+    public static final String INDEX_JSP = "/WEB-INF/jsp/index.jsp";
 }

@@ -12,7 +12,7 @@
     <div class="title">Расписание автобусов</div>
     <div class="menu">
         <div class="menu-links">
-            <div class="menu-link"><a href="<%=Path.INDEX_SERVLET%>">Главная</a></div>
+            <div class="menu-link"><a href="<%=Path.ROOT%>">Главная</a></div>
             <%if (isLoggedIn) {%>
                 <div class="menu-link"><a href="<%=Path.PROFILE_SERVLET%>">Профиль</a></div>
             <%}%>

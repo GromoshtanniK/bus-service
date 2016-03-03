@@ -1,10 +1,20 @@
 package bus.service.beans;
 
+import java.util.List;
+
 public class Route {
     private long id;
     private int busNumber;
     private boolean forward;
+    private List<RouteStop> stops;
 
+    public List<RouteStop> getStops() {
+        return stops;
+    }
+
+    public void setStops(List<RouteStop> stops) {
+        this.stops = stops;
+    }
 
     public long getId() {
         return id;

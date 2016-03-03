@@ -1,10 +1,19 @@
 package bus.service.beans;
 
-public class BusStop {
+public class RouteStop {
 
     private long id;
     private double altitude;
     private double latitude;
+    private boolean isBackWay;
+
+    public boolean isBackWay() {
+        return isBackWay;
+    }
+
+    public void setIsBackWay(boolean isBackWay) {
+        this.isBackWay = isBackWay;
+    }
 
     public long getId() {
         return id;

@@ -18,14 +18,14 @@
     <jsp:include page="/WEB-INF/jsp/header.jsp"/>
     <div class="content">
         <div class="btn-group">
-            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            <button id="choose_route" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                 <span class="choose-route">Выберите номер маршрута</span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="#">101</a></li>
-                <li><a href="#">102</a></li>
-                <li><a href="#">103</a></li>
-                <li><a href="#">105</a></li>
+                <li><a href="?route=101">101</a></li>
+                <li><a href="?route=102">102</a></li>
+                <li><a href="?route=103">103</a></li>
+                <li><a href="?route=105">105</a></li>
             </ul>
         </div>
 
