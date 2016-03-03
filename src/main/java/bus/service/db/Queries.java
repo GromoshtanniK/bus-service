@@ -1,6 +1,6 @@
-package bus.service;
+package bus.service.db;
 
-public abstract class SQL {
+public abstract class Queries {
     public static final String INSERT_ROUTE = "INSERT INTO bus_service.route (route_number, forward) VALUES (?, ?)";
     public static final String SELECT_ALL_ROUTES = "SELECT * FROM bus_service.route";
     public static final String SELECT_ROUTE_BY_ID = "SELECT * FROM bus_service.route WHERE id = ?";
