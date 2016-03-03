@@ -6,4 +6,6 @@ public final class RequestAttributes {
     public static final String PASSWORD = "password";
     public final static String PASSWORD_CONFIRM = "password_confirm";
     public final static String LOG_OUT = "logout";
+    public static final String ROUTE_NUMBER = "route";
+    public static final String ROUTE = "route";
 }

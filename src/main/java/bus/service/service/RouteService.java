@@ -4,6 +4,8 @@ import bus.service.beans.Route;
 
 public class RouteService {
     public Route getRouteByNumber(int routeNumber) {
-        return new Route();
+        Route route = new Route();
+        route.setRouteNumber(routeNumber);
+        return route;
     }
 }

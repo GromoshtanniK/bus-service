@@ -1,6 +1,9 @@
 package bus.service.web.servlets;
 
+import bus.service.beans.Route;
+import bus.service.service.RouteService;
 import bus.service.web.constants.Path;
+import bus.service.web.constants.RequestAttributes;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -13,6 +16,22 @@ import java.io.IOException;
 public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+
+        Route route = getRouteFromRequest(req);
+        if (route != null) {
+            req.setAttribute(RequestAttributes.ROUTE, route);
+        }
+
         req.getRequestDispatcher(Path.INDEX_JSP).forward(req, resp);
+    }
+
+    private Route getRouteFromRequest(HttpServletRequest request) {
+        RouteService routeService = new RouteService();
+        String routeNumberParameter = request.getParameter(RequestAttributes.ROUTE_NUMBER);
+        if (routeNumberParameter != null) {
+            int routeNumber = Integer.valueOf(routeNumberParameter);
+            return routeService.getRouteByNumber(routeNumber);
+        }
+        return null;
     }
 }

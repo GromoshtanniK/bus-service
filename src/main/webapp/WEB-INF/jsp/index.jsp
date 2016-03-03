@@ -1,3 +1,6 @@
+<%@ page import="bus.service.beans.Route" %>
+<%@ page import="bus.service.web.constants.Path" %>
+<%@ page import="bus.service.web.constants.RequestAttributes" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -29,9 +32,20 @@
             </ul>
         </div>
 
+        <%
+            boolean isRouteAttached = false;
+            Route route = (Route) request.getAttribute(RequestAttributes.ROUTE);
+            if (route != null) {
+                isRouteAttached = true;
+            }
+        %>
+
+        <%
+            if (isRouteAttached) {
+        %>
         <div class="route">
             <div class="chosen-route">
-                Выбран маршрут № 102
+                Выбран маршрут №<%=route.getRouteNumber()%>
             </div>
             <div>
                 <div id="map"></div>
@@ -46,6 +60,10 @@
                 </div>
             </div>
         </div>
+
+        <%
+            }
+        %>
     </div>
 </div>
 
