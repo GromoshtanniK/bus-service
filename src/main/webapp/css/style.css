@@ -1,0 +1,207 @@
+@import url("fonts.css");
+
+* {
+    margin: 0;
+    padding: 0;
+}
+
+html {
+    height: 100%;
+    margin-bottom: 0.01em;
+    overflow-y: scroll;
+}
+
+body {
+    font-family: 'Open Sans', sans-serif;
+    background-color: #f0feff;
+}
+
+.wrapper {
+    margin: auto;
+    width: 1200px;
+}
+
+.header {
+    height: 290px;
+    background: #c0eaed url("../images/mercedes-bus-airport-transfer.png") no-repeat right 30px top 10px;
+    position: relative;
+}
+
+.title {
+    position: absolute;;
+    font-size: 28pt;
+    left: 180px;
+    top: 80px;
+    font-weight: 600;
+    color: #293f40;
+}
+
+.menu {
+    position: absolute;
+    width: 100%;
+    background-color: #4a9499;
+    height: 50px;
+    bottom: 20px;
+    font-size: 11pt;
+}
+
+.menu .login {
+    padding-right: 20px;
+    padding-top: 12px;
+    text-align: right;
+    color: #f0ffff;
+    float: right;
+}
+
+.menu a {
+    text-decoration: none;
+    color: #f0ffff;
+}
+
+.menu a:visited {
+    color: #f0ffff;
+}
+
+.menu a:active {
+    color: #293f40;
+}
+
+.menu-links {
+    float: left;
+    margin-top: 12px;
+    margin-left: 10px;
+}
+
+.menu-link {
+    display: inline-block;
+    text-decoration: none;
+    color: #f0ffff;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.content {
+    padding: 20px;
+    background-color: #f0feff;
+    position: relative;
+}
+
+.content button .choose-route {
+    font-family: 'Open Sans', sans-serif;
+    padding-right: 20px;
+}
+.content .btn-group .dropdown-menu {
+    width: 245px;
+}
+
+.footer {
+    height: 50px;
+    background-color: #4a9499;
+    border: solid #c0eaed;
+    border-width: 20px 0 0 0;
+    color: #f0ffff;
+    text-align: center;
+    padding-top: 5px;
+    position: fixed;
+    bottom: 0;
+    width: 1200px;
+}
+
+.route {
+
+}
+
+.route .chosen-route {
+    font-weight: 600;
+    padding: 10px 48px 10px 0;
+    color: #293f40;
+    text-align: center;
+    font-size: 18pt;
+}
+
+#map {
+    height: 500px;
+    width: 700px;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.stop-times {
+    display: inline-block;
+    vertical-align: top;
+    width: 456px;
+    margin-left: -3px;
+    padding: 10px;
+}
+
+.stop-title {
+    font-weight: 600;
+    font-size: 14pt;
+    text-align: center;
+    margin-bottom: 30px;
+}
+
+.stop-time {
+    font-size: 14pt;
+    text-align: center;
+    margin-top: 10px;
+    margin-bottom: 10px;
+}
+
+.content-title {
+    text-align: center;
+    font-size: 16pt;
+    padding-bottom: 30px;
+}
+
+.registration-btn {
+    padding-top: 30px;
+    padding-bottom: 30px;
+}
+
+.registration-btn .btn {
+    font-size: 13pt;
+}
+
+.error .control-label{
+    color: red;
+}
+
+.successful-registration {
+    text-align: center;
+    font-size: 16pt;
+    padding: 30px;
+}
+
+.registration-form {
+    margin-left: 100px;
+}
+
+.login-form{
+    width: 162px;
+    margin: auto;
+}
+
+.login-btn {
+     margin: 20px auto;
+}
+
+.align-center{
+    text-align: center;
+}
+
+.login-error {
+    color: red;
+    position: absolute;
+    top: 212px;
+    right: 354px;
+    display: none;
+}
+
+.visible {
+    display: block;
+}
+
+.login-name {
+    margin-right: 20px;
+}
