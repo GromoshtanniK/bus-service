@@ -9,15 +9,21 @@ import java.sql.SQLException;
 import java.util.List;
 
 public class RouteService {
-    public Route getRouteByNumber(int routeNumber) throws SQLException {
+
+    public Route getRouteByRouteNumber(int routeNumber) {
 
         RouteDao routeDao = new RouteDao();
         RouteStopDao routeStopDao = new RouteStopDao();
 
-        Route route = routeDao.getRouteByRouteNumber(routeNumber);
-        List<RouteStop> routeStops = routeStopDao.getRouteStopsByRoute(route);
-        route.setStops(routeStops);
+        Route route = null;
 
+        try {
+            route = routeDao.getRouteByRouteNumber(routeNumber);
+            List<RouteStop> routeStops = routeStopDao.getRouteStopsByRoute(route);
+            route.setStops(routeStops);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         return route;
     }
 }

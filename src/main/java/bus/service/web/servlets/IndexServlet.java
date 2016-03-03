@@ -17,7 +17,7 @@ public class IndexServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        Route route = getRouteFromRequest(req);
+        Route route = getRoute(req);
         if (route != null) {
             req.setAttribute(RequestAttributes.ROUTE, route);
         }
@@ -25,12 +25,12 @@ public class IndexServlet extends HttpServlet {
         req.getRequestDispatcher(Path.INDEX_JSP).forward(req, resp);
     }
 
-    private Route getRouteFromRequest(HttpServletRequest request) {
+    private Route getRoute(HttpServletRequest request) {
         RouteService routeService = new RouteService();
         String routeNumberParameter = request.getParameter(RequestAttributes.ROUTE_NUMBER);
         if (routeNumberParameter != null) {
             int routeNumber = Integer.valueOf(routeNumberParameter);
-            return routeService.getRouteByNumber(routeNumber);
+            return routeService.getRouteByRouteNumber(routeNumber);
         }
         return null;
     }

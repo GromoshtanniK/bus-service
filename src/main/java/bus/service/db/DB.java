@@ -14,6 +14,7 @@ public class DB {
         config.setJdbcUrl("jdbc:mysql://localhost:3306/bus_service?useSSL=false");
         config.setUsername("root");
         config.setPassword("root");
+        config.setDriverClassName("com.mysql.jdbc.Driver");
 
         dataSource = new HikariDataSource(config);
     }
