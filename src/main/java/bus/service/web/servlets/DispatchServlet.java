@@ -9,10 +9,10 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 
-@WebServlet(urlPatterns = Path.PROFILE_SERVLET)
-public class ProfileServlet extends HttpServlet {
+@WebServlet(urlPatterns = Path.DISPATCH_SERVLET)
+public class DispatchServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.getRequestDispatcher(Path.PROFILE_JSP).forward(req, resp);
+        req.getRequestDispatcher(Path.DISPATCH_JSP).forward(req, resp);
     }
 }

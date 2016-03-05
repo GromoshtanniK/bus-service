@@ -13,8 +13,11 @@
     <div class="menu">
         <div class="menu-links">
             <div class="menu-link"><a href="<%=Path.ROOT%>">Главная</a></div>
-            <%if (isLoggedIn) {%>
+            <%if (isLoggedIn && user.getRole() == User.REGISTERED_USER) {%>
                 <div class="menu-link"><a href="<%=Path.PROFILE_SERVLET%>">Профиль</a></div>
+            <%}%>
+            <%if (isLoggedIn && user.getRole() == User.DISPATCHER) {%>
+                <div class="menu-link"><a href="<%=Path.DISPATCH_SERVLET%>">Редактирование маршрутов</a></div>
             <%}%>
         </div>
         <div class="login">

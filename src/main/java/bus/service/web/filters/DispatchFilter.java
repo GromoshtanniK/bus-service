@@ -11,8 +11,8 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = Path.PROFILE_SERVLET + "/*")
-public class ProfileFilter implements Filter {
+@WebFilter(urlPatterns = Path.DISPATCH_SERVLET + "/*")
+public class DispatchFilter implements Filter {
 
 
     public void init(FilterConfig filterConfig) throws ServletException {
@@ -25,7 +25,7 @@ public class ProfileFilter implements Filter {
         HttpSession session = request.getSession();
         User user = (User) session.getAttribute(SessionAttributes.USER);
 
-        if (user.isRegisteredUser()) {
+        if (user.isDispatcher()) {
             chain.doFilter(request, response);
         } else {
             response.sendRedirect(Path.LOGIN_SERVLET);

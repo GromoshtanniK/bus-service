@@ -33,9 +33,16 @@ public class LoginServlet extends HttpServlet {
         if (service.isValidCredentials(user)) {
             HttpSession session = req.getSession();
             session.setAttribute(SessionAttributes.USER, user);
-            resp.sendRedirect(Path.PROFILE_SERVLET);
+            redirectUser(resp, user);
         } else {
             resp.sendRedirect(Path.LOGIN_SERVLET + "?error=visible");
+        }
+    }
+
+    private void redirectUser(HttpServletResponse response, User user) throws IOException {
+        switch (user.getRole()) {
+            case User.REGISTERED_USER : response.sendRedirect(Path.PROFILE_SERVLET); break;
+            case User.DISPATCHER : response.sendRedirect(Path.DISPATCH_SERVLET); break;
         }
     }
 
