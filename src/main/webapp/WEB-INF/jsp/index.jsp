@@ -57,6 +57,7 @@
                     <div class="stop-time">14:28</div>
                     <div class="stop-time">15:19</div>
                     <div class="stop-time">16:30</div>
+                    <div class="stop-time"><button class="add-stop-time">+</button></div>
                 </div>
             </div>
         </div>
@@ -88,10 +89,9 @@
         myMap.geoObjects.add(pm0f);
 
         myMap.events.add('contextmenu', function (e) {
-            console.log(myMap.hint);
             cords = e.get('coords');
-            myMap.hint.open(cords, '<div class="direction-btn"><button onclick="forward(cords, myMap)" type="button" class="btn btn-default">Прямое направление</button></div>' +
-                    '<div class="direction-btn"><button onclick="backward(cords, myMap)" type="button" class="btn btn-default">Обратное направление</button></divdirection-btn>');
+            myMap.hint.open(cords, '<div class="context-btn"><button onclick="forward(cords, myMap)" type="button" class="btn btn-default">Прямое направление</button></div>' +
+                    '<div class="context-btn"><button onclick="backward(cords, myMap)" type="button" class="btn btn-default">Обратное направление</button></divdirection-btn>');
         });
 
         myMap.events.add("click", function(e) {

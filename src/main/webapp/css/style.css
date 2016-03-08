@@ -206,11 +206,11 @@ body {
     margin-right: 20px;
 }
 
-.direction-btn {
+.context-btn {
     width: 200px !important;
 }
 
-.direction-btn button {
+.context-btn button {
     width: 100% !important;
 }
 
@@ -223,4 +223,23 @@ body {
 
 .ymaps-2-1-35-hint__text {
     background-color: transparent !important;
+}
+
+#stop-title {
+    width: 240px;
+    margin-left: 20px;
+    padding-left: 10px;
+    padding-right: 10px;
+}
+
+.add-stop-time {
+    width: 40px;
+    margin-top: 10px;
+}
+
+.time-input {
+    width: 36px;
+    margin-left: 10px;
+    margin-right: 10px;
+    padding: 5px;
 }
