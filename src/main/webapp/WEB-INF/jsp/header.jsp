@@ -17,7 +17,7 @@
                 <div class="menu-link"><a href="<%=Path.PROFILE_SERVLET%>">Профиль</a></div>
             <%}%>
             <%if (isLoggedIn && user.getRole() == User.DISPATCHER) {%>
-                <div class="menu-link"><a href="<%=Path.DISPATCH_SERVLET%>">Редактирование маршрутов</a></div>
+                <div class="menu-link"><a href="<%=Path.ROUTE_EDIT_SERVLET%>">Редактирование маршрутов</a></div>
             <%}%>
         </div>
         <div class="login">

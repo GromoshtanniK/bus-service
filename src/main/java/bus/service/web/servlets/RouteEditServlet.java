@@ -18,8 +18,8 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
-@WebServlet(urlPatterns = Path.DISPATCH_SERVLET)
-public class DispatchServlet extends HttpServlet {
+@WebServlet(urlPatterns = Path.ROUTE_EDIT_SERVLET)
+public class RouteEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Route route = getRoute(req);

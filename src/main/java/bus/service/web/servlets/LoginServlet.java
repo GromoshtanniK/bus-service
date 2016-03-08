@@ -42,7 +42,7 @@ public class LoginServlet extends HttpServlet {
     private void redirectUser(HttpServletResponse response, User user) throws IOException {
         switch (user.getRole()) {
             case User.REGISTERED_USER : response.sendRedirect(Path.PROFILE_SERVLET); break;
-            case User.DISPATCHER : response.sendRedirect(Path.DISPATCH_SERVLET); break;
+            case User.DISPATCHER : response.sendRedirect(Path.ROUTE_EDIT_SERVLET); break;
         }
     }
 

@@ -32,10 +32,6 @@
             </ul>
         </div>
 
-        <button id="save_route" type="button" class="btn btn-default" aria-expanded="false">
-            Сохранить
-        </button>
-
         <%
             boolean isRouteAttached = false;
             Route route = (Route) request.getAttribute(RequestAttributes.ROUTE);
@@ -47,6 +43,9 @@
         <%
             if (isRouteAttached) {
         %>
+        <button id="save_route" type="button" class="btn btn-default" aria-expanded="false">
+            Сохранить
+        </button>
         <div class="route">
             <div class="chosen-route">
                 Выбран маршрут №<%=route.getRouteNumber()%>
