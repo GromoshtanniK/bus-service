@@ -18,7 +18,7 @@
 </head>
 <body>
 <div class="wrapper">
-    <jsp:include page="/WEB-INF/jsp/header.jsp"/>
+    <jsp:include page="<%=Path.HEADER_JSP%>"/>
     <div class="content">
         <div class="btn-group">
             <button id="choose_route" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -69,7 +69,8 @@
 
 <script>
     ymaps.ready(function () {
-        var myMap = new ymaps.Map('map', { center: [59.977693264318, 30.324142490948248], zoom: 12, controls: ['zoomControl', 'fullscreenControl']});
+
+        myMap = new ymaps.Map('map', { center: [59.977693264318, 30.324142490948248], zoom: 12, controls: ['zoomControl', 'fullscreenControl']});
 
         var pm0f = new ymaps.Placemark([59.97509064931156, 30.317426239574974],
                 null,
@@ -86,123 +87,145 @@
                 });
         myMap.geoObjects.add(pm0f);
 
+        myMap.events.add('contextmenu', function (e) {
+            console.log(myMap.hint);
+            cords = e.get('coords');
+            myMap.hint.open(cords, '<div class="direction-btn"><button onclick="forward(cords, myMap)" type="button" class="btn btn-default">Прямое направление</button></div>' +
+                    '<div class="direction-btn"><button onclick="backward(cords, myMap)" type="button" class="btn btn-default">Обратное направление</button></divdirection-btn>');
+        });
 
-        var pm1f = new ymaps.Placemark([59.97123564709448, 30.314764430137735],
-                null,
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: "./images/avtstn.png",
-                    iconImageSize: [10, 10],
-                    iconImageOffset: [-3, -3],
-                    iconShape: {
-                        type: 'Circle',
-                        coordinates: [0, 0],
-                        radius: 10
-                    }
-                });
-        myMap.geoObjects.add(pm1f);
+        myMap.events.add("click", function(e) {
+            if(myMap.hint.isOpen()) {
+                myMap.hint.close(true);
+            }
+        });
 
 
-        var pm2f = new ymaps.Placemark([59.981457013836426, 30.328498398388454],
-                null,
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: "./images/avtstn.png",
-                    iconImageSize: [10, 10],
-                    iconImageOffset: [-3, -3],
-                    iconShape: {
-                        type: 'Circle',
-                        coordinates: [0, 0],
-                        radius: 10
-                    }
-                });
-        myMap.geoObjects.add(pm2f);
+//        var pm0f = new ymaps.Placemark([59.97509064931156, 30.317426239574974],
+//                null,
+//                {
+//                    iconLayout: 'default#image',
+//                    iconImageHref: "./images/avtstn.png",
+//                    iconImageSize: [10, 10],
+//                    iconImageOffset: [-3, -3],
+//                    iconShape: {
+//                        type: 'Circle',
+//                        coordinates: [0, 0],
+//                        radius: 10
+//                    }
+//                });
+//        myMap.geoObjects.add(pm0f);
+//
+//
+//        var pm1f = new ymaps.Placemark([59.97123564709448, 30.314764430137735],
+//                null,
+//                {
+//                    iconLayout: 'default#image',
+//                    iconImageHref: "./images/avtstn.png",
+//                    iconImageSize: [10, 10],
+//                    iconImageOffset: [-3, -3],
+//                    iconShape: {
+//                        type: 'Circle',
+//                        coordinates: [0, 0],
+//                        radius: 10
+//                    }
+//                });
+//        myMap.geoObjects.add(pm1f);
+//
+//
+//        var pm2f = new ymaps.Placemark([59.981457013836426, 30.328498398388454],
+//                null,
+//                {
+//                    iconLayout: 'default#image',
+//                    iconImageHref: "./images/avtstn.png",
+//                    iconImageSize: [10, 10],
+//                    iconImageOffset: [-3, -3],
+//                    iconShape: {
+//                        type: 'Circle',
+//                        coordinates: [0, 0],
+//                        radius: 10
+//                    }
+//                });
+//        myMap.geoObjects.add(pm2f);
+//
+//        var pm3f = new ymaps.Placemark([59.98303856785052, 30.332048804932086],
+//                null,
+//                {
+//                    iconLayout: 'default#image',
+//                    iconImageHref: "./images/avtstn.png",
+//                    iconImageSize: [10, 10],
+//                    iconImageOffset: [-3, -3],
+//                    iconShape: {
+//                        type: 'Circle',
+//                        coordinates: [0, 0],
+//                        radius: 10
+//                    }
+//                });
+//        myMap.geoObjects.add(pm3f);
+//
+//
+//
+//        var pm0b = new ymaps.Placemark([59.97077213267899, 30.31407075173795],
+//                null,
+//                {
+//                    iconLayout: 'default#image',
+//                    iconImageHref: "./images/trmstn.png",
+//                    iconImageSize: [10, 10],
+//                    iconImageOffset: [-3, -3],
+//                    iconShape: {
+//                        type: 'Circle',
+//                        coordinates: [0, 0],
+//                        radius: 10
+//                    }
+//                });
+//        myMap.geoObjects.add(pm0b);
+//
+//        var pm1b = new ymaps.Placemark([59.97486210409955, 30.316761051739267],
+//                null,
+//                {
+//                    iconLayout: 'default#image',
+//                    iconImageHref: "./images/trmstn.png",
+//                    iconImageSize: [10, 10],
+//                    iconImageOffset: [-3, -3],
+//                    iconShape: {
+//                        type: 'Circle',
+//                        coordinates: [0, 0],
+//                        radius: 10
+//                    }
+//                });
+//        myMap.geoObjects.add(pm1b);
+//
+//
+//        var pm2b = new ymaps.Placemark([59.98144894911788, 30.32779565962654],
+//                null,
+//                {
+//                    iconLayout: 'default#image',
+//                    iconImageHref: "./images/trmstn.png",
+//                    iconImageSize: [10, 10],
+//                    iconImageOffset: [-3, -3],
+//                    iconShape: {
+//                        type: 'Circle',
+//                        coordinates: [0, 0],
+//                        radius: 10
+//                    }
+//                });
+//        myMap.geoObjects.add(pm2b);
+//
+//        var pm3b = new ymaps.Placemark([59.98366398439077, 30.332768475140163],
+//                null,
+//                {
+//                    iconLayout: 'default#image',
+//                    iconImageHref: "./images/trmstn.png",
+//                    iconImageSize: [10, 10],
+//                    iconImageOffset: [-3, -3],
+//                    iconShape: {
+//                        type: 'Circle',
+//                        coordinates: [0, 0],
+//                        radius: 10
+//                    }
+//                });
+//        myMap.geoObjects.add(pm3b);
 
-        var pm3f = new ymaps.Placemark([59.98303856785052, 30.332048804932086],
-                null,
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: "./images/avtstn.png",
-                    iconImageSize: [10, 10],
-                    iconImageOffset: [-3, -3],
-                    iconShape: {
-                        type: 'Circle',
-                        coordinates: [0, 0],
-                        radius: 10
-                    }
-                });
-        myMap.geoObjects.add(pm3f);
-
-
-
-        var pm0b = new ymaps.Placemark([59.97077213267899, 30.31407075173795],
-                null,
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: "./images/trmstn.png",
-                    iconImageSize: [10, 10],
-                    iconImageOffset: [-3, -3],
-                    iconShape: {
-                        type: 'Circle',
-                        coordinates: [0, 0],
-                        radius: 10
-                    }
-                });
-        myMap.geoObjects.add(pm0b);
-
-        var pm1b = new ymaps.Placemark([59.97486210409955, 30.316761051739267],
-                null,
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: "./images/trmstn.png",
-                    iconImageSize: [10, 10],
-                    iconImageOffset: [-3, -3],
-                    iconShape: {
-                        type: 'Circle',
-                        coordinates: [0, 0],
-                        radius: 10
-                    }
-                });
-        myMap.geoObjects.add(pm1b);
-
-
-        var pm2b = new ymaps.Placemark([59.98144894911788, 30.32779565962654],
-                null,
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: "./images/trmstn.png",
-                    iconImageSize: [10, 10],
-                    iconImageOffset: [-3, -3],
-                    iconShape: {
-                        type: 'Circle',
-                        coordinates: [0, 0],
-                        radius: 10
-                    }
-                });
-        myMap.geoObjects.add(pm2b);
-
-        var pm3b = new ymaps.Placemark([59.98366398439077, 30.332768475140163],
-                null,
-                {
-                    iconLayout: 'default#image',
-                    iconImageHref: "./images/trmstn.png",
-                    iconImageSize: [10, 10],
-                    iconImageOffset: [-3, -3],
-                    iconShape: {
-                        type: 'Circle',
-                        coordinates: [0, 0],
-                        radius: 10
-                    }
-                });
-        myMap.geoObjects.add(pm3b);
-
-
-
-        myMap.events.add("click",
-                function(e) {
-                    var coords = e.get('coords');
-                    console.log(coords);
-                });
     });
 
 </script>
