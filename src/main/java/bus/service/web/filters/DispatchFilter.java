@@ -11,7 +11,7 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 import java.io.IOException;
 
-@WebFilter(urlPatterns = Path.ROUTE_EDIT_SERVLET + "/*")
+@WebFilter(urlPatterns = {Path.ROUTE_EDIT_SERVLET + "/*", Path.ADD_DELETE_SERVLET + "/*"})
 public class DispatchFilter implements Filter {
 
 

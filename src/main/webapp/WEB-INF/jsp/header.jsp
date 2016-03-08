@@ -18,6 +18,7 @@
             <%}%>
             <%if (isLoggedIn && user.getRole() == User.DISPATCHER) {%>
                 <div class="menu-link"><a href="<%=Path.ROUTE_EDIT_SERVLET%>">Редактирование маршрутов</a></div>
+                <div class="menu-link"><a href="<%=Path.ADD_DELETE_SERVLET%>">Добавление/Удаление маршрутов</a></div>
             <%}%>
         </div>
         <div class="login">
