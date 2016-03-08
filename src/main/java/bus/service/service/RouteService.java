@@ -26,4 +26,8 @@ public class RouteService {
         }
         return route;
     }
+
+    public void saveNewRoute(Route route) {
+
+    }
 }

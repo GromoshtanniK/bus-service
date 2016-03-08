@@ -58,14 +58,13 @@
             </div>
         </div>
 
+        <script>
+            initMap([59.977693264318, 30.324142490948248], <%=route.getRouteNumber()%>);
+        </script>
         <%
             }
         %>
     </div>
-
-        <script>
-            initMap([59.977693264318, 30.324142490948248]);
-        </script>
 </div>
 </body>
 </html>

@@ -12,10 +12,15 @@ $(function(){
             placeMarkArray.push(placeMarkData);
         }
 
+
+
         $.ajax({
             type: "POST",
             url: "/dispatch",
-            data: JSON.stringify(placeMarkArray),
+            data: JSON.stringify({
+                routeNumber : routeNumber,
+                placeMarks : placeMarkArray
+            }),
             contentType: "application/json; charset=utf-8",
             dataType: "json",
             success: function(data){alert(data);},
@@ -29,7 +34,8 @@ $(function(){
 
 showingMark = null;
 
-function initMap(c) {
+function initMap(c, route) {
+    routeNumber = route;
     ymaps.ready(function () {
 
         myMap = new ymaps.Map('map', { center: c, zoom: 12, controls: ['zoomControl', 'fullscreenControl']});
@@ -106,6 +112,7 @@ function info() {
     });
 
     add.find(".add-stop-time").click(function(){
+        //TODO кнопка удаления
         var timeInput = $('<div class="stop-time"><input class="time-input hours">:<input class="time-input minutes"></div>');
         timeTable.append(timeInput);
         var elemIndex = currentMark.times.length;
@@ -117,6 +124,12 @@ function info() {
         timeInput.find(".minutes").change(function(){
             currentTimeObj.minutes = this.value;
         });
+
+        timeInput.find(".DELETE").click(function(){
+            currentTimeObj.minutes = this.value;
+        });
+
+
     });
 
     myMap.hint.close(true);
