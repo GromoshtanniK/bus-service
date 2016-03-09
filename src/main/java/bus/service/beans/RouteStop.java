@@ -1,5 +1,6 @@
 package bus.service.beans;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class RouteStop {
@@ -8,8 +9,10 @@ public class RouteStop {
     private double altitude;
     private double latitude;
     private String stopName;
-    private List<StopTime> stopTimes;
-    //private long routeId;
+    private boolean isBackWay;
+    private List<StopTime> stopTimes = new ArrayList<StopTime>();
+    private long routeId;
+
 
     public String getStopName() {
         return stopName;
@@ -26,8 +29,6 @@ public class RouteStop {
     public void setStopTimes(List<StopTime> stopTimes) {
         this.stopTimes = stopTimes;
     }
-
-    private boolean isBackWay;
 
     public boolean isBackWay() {
         return isBackWay;
@@ -61,11 +62,11 @@ public class RouteStop {
         this.latitude = latitude;
     }
 
-//    public long getRouteId() {
-//        return routeId;
-//    }
-//
-//    public void setRouteId(long routeId) {
-//        this.routeId = routeId;
-//    }
+    public long getRouteId() {
+        return routeId;
+    }
+
+    public void setRouteId(long routeId) {
+        this.routeId = routeId;
+    }
 }

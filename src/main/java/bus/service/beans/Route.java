@@ -6,7 +6,8 @@ import java.util.List;
 public class Route {
     private long id;
     private int routeNumber;
-    private List<RouteStop> stops/* = new ArrayList<RouteStop>()*/;
+    private String forward;
+    private List<RouteStop> stops = new ArrayList<RouteStop>();
 
     public List<RouteStop> getStops() {
         return stops;
@@ -30,5 +31,13 @@ public class Route {
 
     public void setRouteNumber(int routeNumber) {
         this.routeNumber = routeNumber;
+    }
+
+    public String getForward() {
+        return forward;
+    }
+
+    public void setForward(String forward) {
+        this.forward = forward;
     }
 }

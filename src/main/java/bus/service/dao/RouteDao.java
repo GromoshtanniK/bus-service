@@ -16,7 +16,7 @@ public class RouteDao {
         QueryRunner queryRunner = new QueryRunner(DB.getDataSource());
 
     public void createRoute(Route route) throws SQLException {
-        queryRunner.update(Queries.INSERT_ROUTE, route.getRouteNumber());
+        queryRunner.update(Queries.INSERT_ROUTE, route.getRouteNumber(), route.getForward());
     }
 
     public List<Route> getAllRoutes() throws SQLException {
@@ -27,8 +27,7 @@ public class RouteDao {
                     Route route = new Route();
                     route.setId(rs.getLong(ColumnNames.ID_COLUMN));
                     route.setRouteNumber(rs.getInt(ColumnNames.ROUTE_NUMBER_COLUMN));
-                    //todo
-                    //route.getStops().addAll(rs.getObject(ColumnNames.??? ,ArrayList.class));
+                    route.setForward(rs.getString(ColumnNames.ROUTE_FORWARD_COLUMN));
                     routes.add(route);
                 }
                 return routes;
@@ -44,8 +43,7 @@ public class RouteDao {
                     route = new Route();
                     route.setId(rs.getLong(ColumnNames.ID_COLUMN));
                     route.setRouteNumber(rs.getInt(ColumnNames.ROUTE_NUMBER_COLUMN));
-                    //todo
-                    //route.getStops().addAll(rs.getObject(ColumnNames.??? ,ArrayList.class));
+                    route.setForward(rs.getString(ColumnNames.ROUTE_FORWARD_COLUMN));
                 }
                 return route;
             }
@@ -64,5 +62,9 @@ public class RouteDao {
 
     public void deleteRoute(Route route) throws SQLException {
         deleteRouteById(route.getId());
+    }
+
+    public void updateRoute(Route route) {
+        //todo
     }
 }
