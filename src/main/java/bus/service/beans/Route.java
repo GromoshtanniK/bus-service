@@ -6,7 +6,7 @@ import java.util.List;
 public class Route {
     private long id;
     private int routeNumber;
-    private List<RouteStop> stops = new ArrayList<RouteStop>();
+    private List<RouteStop> stops/* = new ArrayList<RouteStop>()*/;
 
     public List<RouteStop> getStops() {
         return stops;

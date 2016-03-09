@@ -9,7 +9,7 @@ public class RouteStop {
     private double latitude;
     private String stopName;
     private List<StopTime> stopTimes;
-    private long routeId;
+    //private long routeId;
 
     public String getStopName() {
         return stopName;
@@ -61,11 +61,11 @@ public class RouteStop {
         this.latitude = latitude;
     }
 
-    public long getRouteId() {
-        return routeId;
-    }
-
-    public void setRouteId(long routeId) {
-        this.routeId = routeId;
-    }
+//    public long getRouteId() {
+//        return routeId;
+//    }
+//
+//    public void setRouteId(long routeId) {
+//        this.routeId = routeId;
+//    }
 }

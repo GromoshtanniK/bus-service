@@ -53,7 +53,6 @@ public class RouteDao {
     }
 
     public Route getRouteByRouteNumber(int routeNumber) throws SQLException {
-        //todo
         Route route = new Route();
         route.setRouteNumber(routeNumber);
         return route;
