@@ -27,6 +27,8 @@ public class RouteDao {
                     Route route = new Route();
                     route.setId(rs.getLong(ColumnNames.ID_COLUMN));
                     route.setRouteNumber(rs.getInt(ColumnNames.ROUTE_NUMBER_COLUMN));
+                    //todo
+                    //route.getStops().addAll(rs.getObject(ColumnNames.??? ,ArrayList.class));
                     routes.add(route);
                 }
                 return routes;
@@ -42,6 +44,8 @@ public class RouteDao {
                     route = new Route();
                     route.setId(rs.getLong(ColumnNames.ID_COLUMN));
                     route.setRouteNumber(rs.getInt(ColumnNames.ROUTE_NUMBER_COLUMN));
+                    //todo
+                    //route.getStops().addAll(rs.getObject(ColumnNames.??? ,ArrayList.class));
                 }
                 return route;
             }
@@ -49,6 +53,7 @@ public class RouteDao {
     }
 
     public Route getRouteByRouteNumber(int routeNumber) throws SQLException {
+        //todo
         Route route = new Route();
         route.setRouteNumber(routeNumber);
         return route;

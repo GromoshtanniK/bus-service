@@ -10,4 +10,6 @@ public abstract class Queries {
     public static final String SELECT_ALL_ROUTE_STOPS = "SELECT * FROM bus_service.bus_stop";
     public static final String SELECT_ROUTE_STOP_BY_ID = "SELECT * FROM bus_service.bus_stop WHERE id = ?";
     public static final String DELETE_ROUTE_STOP_BY_ID = "DELETE FROM bus_service.bus_stop WHERE id = ?";
+    public static final String SELECT_ROUTE_STOPS_BY_ROUTE = "SELECT * FROM bus_service.bus_stop WHERE route_id = ?";
+    public static final String DELETE_ROUTE_STOPS_BY_ROUTE_ID = "DELETE FROM bus_service.bus_stop WHERE route_id = ?";
 }
