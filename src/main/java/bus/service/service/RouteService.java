@@ -63,6 +63,20 @@ public class RouteService {
     }
 
     public void updateRoute(Route route) {
-        //todo
+        RouteDao routeDao = new RouteDao();
+        RouteStopDao routeStopDao = new RouteStopDao();
+        StopTimeDao stopTimeDao = new StopTimeDao();
+
+        try {
+            routeDao.updateRoute(route);
+            for (RouteStop routeStop : route.getStops()) {
+                routeStopDao.updateRouteStop(routeStop);
+                for (StopTime stopTime : routeStop.getStopTimes()) {
+                    stopTimeDao.updateStopTime(stopTime);
+                }
+            }
+        } catch (SQLException e) {
+            //todo log
+        }
     }
 }
