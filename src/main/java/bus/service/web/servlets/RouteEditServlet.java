@@ -44,11 +44,7 @@ public class RouteEditServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Route route = parseSaveRouteRequest(req.getReader().readLine());
         RouteService routeService = new RouteService();
-        try {
-            routeService.saveNewRoute(route);
-        } catch (SQLException e) {
-            //todo log
-        }
+        routeService.saveNewRoute(route);
     }
 
     private Route parseSaveRouteRequest(String json) {
