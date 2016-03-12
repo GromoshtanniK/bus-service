@@ -13,7 +13,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class RouteDao {
-        QueryRunner queryRunner = new QueryRunner(DB.getDataSource());
+
+    QueryRunner queryRunner = new QueryRunner(DB.getDataSource());
 
     public void createRoute(Route route) throws SQLException {
         queryRunner.update(Queries.INSERT_ROUTE, route.getRouteNumber(), route.getForward());
@@ -51,9 +52,18 @@ public class RouteDao {
     }
 
     public Route getRouteByRouteNumber(int routeNumber) throws SQLException {
-        Route route = new Route();
-        route.setRouteNumber(routeNumber);
-        return route;
+        return queryRunner.query(Queries.SELECT_ROUTE_BY_ROUTE_NUMBER, new ResultSetHandler<Route>() {
+            public Route handle(ResultSet resultSet) throws SQLException {
+                Route route = null;
+                while (resultSet.next()) {
+                    route = new Route();
+                    route.setId(resultSet.getLong(ColumnNames.ID_COLUMN));
+                    route.setRouteNumber(resultSet.getInt(ColumnNames.ROUTE_NUMBER_COLUMN));
+                    route.setForward(resultSet.getString(ColumnNames.ROUTE_FORWARD_COLUMN));
+                }
+                return route;
+            }
+        }, routeNumber);
     }
 
     public void deleteRouteById(long id) throws SQLException {
