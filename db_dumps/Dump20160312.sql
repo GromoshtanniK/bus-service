@@ -18,6 +18,32 @@ USE `bus_service`;
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `route`
+--
+
+DROP TABLE IF EXISTS `route`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `route` (
+  `id` bigint(20) NOT NULL,
+  `route_number` int(11) NOT NULL,
+  `forward` varchar(45) DEFAULT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`),
+  UNIQUE KEY `route_number_UNIQUE` (`route_number`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `route`
+--
+
+LOCK TABLES `route` WRITE;
+/*!40000 ALTER TABLE `route` DISABLE KEYS */;
+/*!40000 ALTER TABLE `route` ENABLE KEYS */;
+UNLOCK TABLES;
+
+--
 -- Table structure for table `route_stop`
 --
 
@@ -25,12 +51,12 @@ DROP TABLE IF EXISTS `route_stop`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `route_stop` (
-  `id` int(11) NOT NULL,
+  `id` bigint(20) NOT NULL,
   `altitude` double NOT NULL,
   `latitude` double NOT NULL,
   `stop_name` varchar(45) DEFAULT NULL,
-  `is_back_way` int(11) DEFAULT NULL,
-  `route_id` int(11) NOT NULL,
+  `is_back_way` tinyint(4) DEFAULT NULL,
+  `route_id` bigint(20) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `id_UNIQUE` (`id`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
@@ -44,6 +70,32 @@ LOCK TABLES `route_stop` WRITE;
 /*!40000 ALTER TABLE `route_stop` DISABLE KEYS */;
 /*!40000 ALTER TABLE `route_stop` ENABLE KEYS */;
 UNLOCK TABLES;
+
+--
+-- Table structure for table `stop_time`
+--
+
+DROP TABLE IF EXISTS `stop_time`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `stop_time` (
+  `id` bigint(20) NOT NULL,
+  `hours` int(11) NOT NULL,
+  `minutes` int(11) NOT NULL,
+  `route_stop_id` bigint(20) NOT NULL,
+  PRIMARY KEY (`id`),
+  UNIQUE KEY `id_UNIQUE` (`id`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `stop_time`
+--
+
+LOCK TABLES `stop_time` WRITE;
+/*!40000 ALTER TABLE `stop_time` DISABLE KEYS */;
+/*!40000 ALTER TABLE `stop_time` ENABLE KEYS */;
+UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
 /*!40101 SET SQL_MODE=@OLD_SQL_MODE */;
@@ -54,4 +106,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2016-03-12 17:38:35
+-- Dump completed on 2016-03-12 18:50:30
