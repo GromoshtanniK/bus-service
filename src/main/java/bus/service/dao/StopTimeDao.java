@@ -68,4 +68,12 @@ public class StopTimeDao {
     public List<StopTime> getStopTimesByRouteStop(RouteStop routeStop) throws SQLException {
         return getStopTimesByRouteStopId(routeStop.getId());
     }
+
+    public void deleteStopTimesByRouteStopId(long id) throws SQLException {
+        queryRunner.update(Queries.DELETE_STOP_TIMES_BY_ROUTE_STOP_ID, id);
+    }
+
+    public void deleteStopTimesByRouteStop(RouteStop routeStop) throws SQLException {
+        deleteStopTimesByRouteStopId(routeStop.getId());
+    }
 }
