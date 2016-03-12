@@ -8,9 +8,22 @@ import bus.service.dao.RouteStopDao;
 import bus.service.dao.StopTimeDao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
 import java.util.List;
 
 public class RouteService {
+
+    public List<Route> getAllRoutes() {
+        RouteDao routeDao = new RouteDao();
+        List<Route> routes = new ArrayList<Route>();
+
+        try {
+            routes.addAll(routeDao.getAllRoutes());
+        } catch (SQLException e) {
+            //todo log
+        }
+        return routes;
+    }
 
     public Route getRouteByRouteNumber(int routeNumber) {
 
@@ -29,21 +42,24 @@ public class RouteService {
         return route;
     }
 
-    public void saveNewRoute(Route route) throws SQLException {
+    public void saveNewRoute(Route route) {
 
         RouteDao routeDao = new RouteDao();
         RouteStopDao routeStopDao = new RouteStopDao();
         StopTimeDao stopTimeDao = new StopTimeDao();
-
-        for (RouteStop routeStop : route.getStops()) {
-            routeStop.setRouteId(route.getId());
-            routeStopDao.createRouteStop(routeStop);
-            for (StopTime stopTime : routeStop.getStopTimes()) {
-                stopTime.setRouteStopId(routeStop.getId());
-                stopTimeDao.createStopTime(stopTime);
+        try {
+            for (RouteStop routeStop : route.getStops()) {
+                routeStop.setRouteId(route.getId());
+                routeStopDao.createRouteStop(routeStop);
+                for (StopTime stopTime : routeStop.getStopTimes()) {
+                    stopTime.setRouteStopId(routeStop.getId());
+                    stopTimeDao.createStopTime(stopTime);
+                }
             }
+            routeDao.createRoute(route);
+        } catch (SQLException e) {
+            //todo log
         }
-        routeDao.createRoute(route);
     }
 
     public void updateRoute(Route route) {
