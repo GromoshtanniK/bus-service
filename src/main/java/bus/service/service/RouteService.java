@@ -24,7 +24,7 @@ public class RouteService {
             List<RouteStop> routeStops = routeStopDao.getRouteStopsByRoute(route);
             route.setStops(routeStops);
         } catch (SQLException e) {
-            e.printStackTrace();
+            //todo log
         }
         return route;
     }
