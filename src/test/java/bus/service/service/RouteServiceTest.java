@@ -1,13 +1,11 @@
-package java.bus.service.service;
+package bus.service.service;
 
 
-import bus.service.service.RouteService;
+import bus.service.dao.RouteDaoMock;
+import bus.service.dao.RouteStopDaoMock;
+import bus.service.dao.StopTimeDaoMock;
 import org.junit.Before;
 import org.junit.Test;
-
-import java.bus.service.dao.RouteDaoMock;
-import java.bus.service.dao.RouteStopDaoMock;
-import java.bus.service.dao.StopTimeDaoMock;
 
 public class RouteServiceTest {
 

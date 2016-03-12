@@ -1,4 +1,4 @@
-package java.bus.service.dao;
+package bus.service.dao;
 
 
 public class RouteDaoMock {
