@@ -15,7 +15,6 @@ import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
-import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -44,7 +43,7 @@ public class RouteEditServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Route route = parseSaveRouteRequest(req.getReader().readLine());
         RouteService routeService = new RouteService();
-        routeService.saveNewRoute(route);
+        routeService.deleteAndCreateNewRoute(route);
     }
 
     private Route parseSaveRouteRequest(String json) {

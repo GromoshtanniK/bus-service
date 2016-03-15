@@ -1,6 +1,8 @@
 <%@ page import="bus.service.web.constants.Path" %>
 <%@ page import="bus.service.beans.Route" %>
 <%@ page import="bus.service.web.constants.RequestAttributes" %>
+<%@ page import="bus.service.beans.RouteStop" %>
+<%@ page import="bus.service.beans.StopTime" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -58,7 +60,29 @@
         </div>
 
         <script>
-            initMap([59.977693264318, 30.324142490948248], <%=route.getRouteNumber()%>);
+            initMap([59.977693264318, 30.324142490948248], <%=route.getRouteNumber()%>,
+                    [
+                            <%
+                            for (RouteStop routeStop : route.getStops()) {
+                            %>
+                                {
+                                    forward: <%=routeStop.isBackWay()%>,
+                                    name: "<%=routeStop.getStopName()%>",
+                                    coordinates: [<%=routeStop.getAltitude()%>, <%=routeStop.getLatitude()%>],
+                                    times: [
+                                    <%
+                                        for (StopTime stopTime : routeStop.getStopTimes()) {
+                                        %>
+                                            {hours: <%=stopTime.getHours()%>, minutes: <%=stopTime.getMinutes()%>},
+                                        <%
+                                        }
+                                    %>
+                                    ]
+                                },
+                            <%
+                            }
+                            %>
+                    ]);
         </script>
         <%
             }

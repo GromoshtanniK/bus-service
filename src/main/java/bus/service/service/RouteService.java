@@ -29,12 +29,19 @@ public class RouteService {
 
         RouteDao routeDao = new RouteDao();
         RouteStopDao routeStopDao = new RouteStopDao();
+        StopTimeDao stopTimeDao = new StopTimeDao();
 
         Route route = null;
 
         try {
             route = routeDao.getRouteByRouteNumber(routeNumber);
             List<RouteStop> routeStops = routeStopDao.getRouteStopsByRoute(route);
+
+            for (RouteStop routeStop : routeStops) {
+                List<StopTime> stopTimes = stopTimeDao.getStopTimesByRouteStop(routeStop);
+                routeStop.setStopTimes(stopTimes);
+            }
+
             route.setStops(routeStops);
         } catch (SQLException e) {
             //todo log
@@ -42,21 +49,26 @@ public class RouteService {
         return route;
     }
 
-    public void saveNewRoute(Route route) {
+    public void deleteAndCreateNewRoute(Route route) {
 
         RouteDao routeDao = new RouteDao();
         RouteStopDao routeStopDao = new RouteStopDao();
         StopTimeDao stopTimeDao = new StopTimeDao();
+
         try {
+            routeDao.deleteRouteById(routeDao.getRouteByRouteNumber(route.getRouteNumber()).getId());
+            routeDao.createRoute(route);
+
             for (RouteStop routeStop : route.getStops()) {
                 routeStop.setRouteId(route.getId());
                 routeStopDao.createRouteStop(routeStop);
+
                 for (StopTime stopTime : routeStop.getStopTimes()) {
                     stopTime.setRouteStopId(routeStop.getId());
                     stopTimeDao.createStopTime(stopTime);
                 }
+
             }
-            routeDao.createRoute(route);
         } catch (SQLException e) {
             //todo log
         }

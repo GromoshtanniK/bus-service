@@ -7,6 +7,7 @@ import bus.service.db.DB;
 import bus.service.db.Queries;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,7 +20,8 @@ public class StopTimeDao {
     QueryRunner queryRunner = new QueryRunner(DB.getDataSource());
 
     public void createStopTime(StopTime stopTime) throws SQLException {
-        queryRunner.update(Queries.INSERT_STOP_TIME, stopTime.getHours(), stopTime.getMinutes(), stopTime.getRouteStopId());
+        long stopTimeId = queryRunner.insert(Queries.INSERT_STOP_TIME, new ScalarHandler<Long>(), stopTime.getHours(), stopTime.getMinutes(), stopTime.getRouteStopId());
+        stopTime.setId(stopTimeId);
     }
 
     public void deleteStopTime(StopTime stopTime) throws SQLException {
@@ -55,6 +57,7 @@ public class StopTimeDao {
                 List<StopTime> stopTimes = new ArrayList<StopTime>();
                 while (resultSet.next()) {
                     StopTime stopTime = new StopTime();
+                    stopTime.setId(resultSet.getInt(ColumnNames.ID_COLUMN));
                     stopTime.setHours(resultSet.getInt(ColumnNames.STOP_TIME_HOURS_COLUMN));
                     stopTime.setMinutes(resultSet.getInt(ColumnNames.STOP_TIME_MINUTES_COLUMN));
                     stopTime.setRouteStopId(resultSet.getLong(ColumnNames.ROUTE_STOP_ID_COLUMN));

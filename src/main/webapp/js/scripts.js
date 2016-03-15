@@ -16,7 +16,7 @@ $(function(){
 
         $.ajax({
             type: "POST",
-            url: "/dispatch",
+            url: "/edit",
             data: JSON.stringify({
                 routeNumber : routeNumber,
                 placeMarks : placeMarkArray
@@ -34,7 +34,7 @@ $(function(){
 
 showingMark = null;
 
-function initMap(c, route) {
+function initMap(c, route, initPlaceMarks) {
     routeNumber = route;
     ymaps.ready(function () {
 
@@ -49,15 +49,37 @@ function initMap(c, route) {
                 myMap.hint.close(true);
             }
         });
+
+        showSavedPlaceMarks(myMap, initPlaceMarks);
+
     });
 }
 
+function showSavedPlaceMarks(map, initPlaceMarks) {
+
+    for(var i = 0; i < initPlaceMarks.length; i++) {
+        var placeMarkData = initPlaceMarks[i];
+
+        var mark;
+
+        if(placeMarkData.forward) {
+            mark = forward(placeMarkData.coordinates, map);
+        } else {
+            mark = backward(placeMarkData.coordinates, map);
+        }
+
+        mark.name = placeMarkData.name;
+        mark.times = placeMarkData.times;
+    }
+
+}
+
 function forward(cords, map) {
-    createPlaceMark("./images/avtstn.png", cords, map);
+    return createPlaceMark("./images/avtstn.png", cords, map);
 }
 
 function backward(cords, map) {
-   createPlaceMark("./images/trmstn.png", cords, map);
+   return createPlaceMark("./images/trmstn.png", cords, map);
 }
 
 function createPlaceMark(image, cords, map) {
@@ -80,6 +102,7 @@ function createPlaceMark(image, cords, map) {
     mark.events.add('contextmenu', markMenu);
     map.geoObjects.add(mark);
     map.hint.close(true);
+    return mark;
 }
 
 function markMenu(e) {
@@ -125,6 +148,7 @@ function info() {
             currentTimeObj.minutes = this.value;
         });
 
+        //TODO доделать удаление
         timeInput.find(".DELETE").click(function(){
             currentTimeObj.minutes = this.value;
         });

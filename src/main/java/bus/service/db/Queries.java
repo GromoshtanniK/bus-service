@@ -2,8 +2,8 @@ package bus.service.db;
 
 public abstract class Queries {
     //route
-    public static final String INSERT_ROUTE = "INSERT INTO bus_service.route (route_number, forward) VALUES (?, ?)";
-    public static final String UPDATE_ROUTE = "UPDATE bus_service.route SET route_number = ?, forward = ? WHERE id = ?";
+    public static final String INSERT_ROUTE = "INSERT INTO bus_service.route (route_number) VALUES (?)";
+    public static final String UPDATE_ROUTE = "UPDATE bus_service.route SET route_number = ? WHERE id = ?";
     public static final String SELECT_ALL_ROUTES = "SELECT * FROM bus_service.route";
     public static final String SELECT_ROUTE_BY_ROUTE_NUMBER = "SELECT * FROM bus_service.route WHERE route_number = ?";
     public static final String SELECT_ROUTE_BY_ID = "SELECT * FROM bus_service.route WHERE id = ?";

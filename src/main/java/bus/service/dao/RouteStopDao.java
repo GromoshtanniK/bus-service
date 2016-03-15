@@ -7,6 +7,7 @@ import bus.service.beans.RouteStop;
 import bus.service.db.DB;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -19,8 +20,9 @@ public class RouteStopDao {
     QueryRunner queryRunner = new QueryRunner(DB.getDataSource());
 
     public void createRouteStop(RouteStop routeStop) throws SQLException {
-        queryRunner.update(Queries.INSERT_ROUTE_STOP, routeStop.getAltitude(), routeStop.getLatitude(), routeStop.getStopName(),
+        long routeStopId = queryRunner.insert(Queries.INSERT_ROUTE_STOP, new ScalarHandler<Long>(), routeStop.getAltitude(), routeStop.getLatitude(), routeStop.getStopName(),
                 routeStop.isBackWay(), routeStop.getRouteId());
+        routeStop.setId(routeStopId);
     }
 
     public List<RouteStop> getAllRouteStops() throws SQLException {
@@ -32,6 +34,8 @@ public class RouteStopDao {
                     routeStop.setId(rs.getLong(ColumnNames.ID_COLUMN));
                     routeStop.setAltitude(rs.getDouble(ColumnNames.ALTITUDE_COLUMN));
                     routeStop.setLatitude(rs.getDouble(ColumnNames.LATITUDE_COLUMN));
+                    routeStop.setStopName(rs.getString(ColumnNames.STOP_NAME_COLUMN));
+                    routeStop.setIsBackWay(rs.getBoolean(ColumnNames.IS_BACK_WAY_COLUMN));
                     routeStop.setRouteId(rs.getLong(ColumnNames.ROUTE_ID_COLUMN));
                     routeStops.add(routeStop);
                 }
@@ -72,7 +76,7 @@ public class RouteStopDao {
         deleteRouteStopById(routeStop.getId());
     }
 
-    private List<RouteStop> getRouteStopsByRouteId(long id) throws SQLException {
+    public List<RouteStop> getRouteStopsByRouteId(long id) throws SQLException {
         return queryRunner.query(Queries.SELECT_ROUTE_STOPS_BY_ROUTE, new ResultSetHandler<List<RouteStop>>() {
             public List<RouteStop> handle(ResultSet rs) throws SQLException {
                 List<RouteStop> routeStops = new ArrayList<RouteStop>();
@@ -81,6 +85,8 @@ public class RouteStopDao {
                     routeStop.setId(rs.getLong(ColumnNames.ID_COLUMN));
                     routeStop.setAltitude(rs.getDouble(ColumnNames.ALTITUDE_COLUMN));
                     routeStop.setLatitude(rs.getDouble(ColumnNames.LATITUDE_COLUMN));
+                    routeStop.setStopName(rs.getString(ColumnNames.STOP_NAME_COLUMN));
+                    routeStop.setIsBackWay(rs.getBoolean(ColumnNames.IS_BACK_WAY_COLUMN));
                     routeStop.setRouteId(rs.getLong(ColumnNames.ROUTE_ID_COLUMN));
                     routeStops.add(routeStop);
                 }

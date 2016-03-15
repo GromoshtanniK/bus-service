@@ -6,6 +6,7 @@ import bus.service.beans.Route;
 import bus.service.db.DB;
 import org.apache.commons.dbutils.QueryRunner;
 import org.apache.commons.dbutils.ResultSetHandler;
+import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -16,8 +17,9 @@ public class RouteDao {
 
     QueryRunner queryRunner = new QueryRunner(DB.getDataSource());
 
-    public void createRoute(Route route) throws SQLException {
-        queryRunner.update(Queries.INSERT_ROUTE, route.getRouteNumber(), route.getForward());
+    public void createRoute(final Route route) throws SQLException {
+        long routeId = queryRunner.insert(Queries.INSERT_ROUTE, new ScalarHandler<Long>(), route.getRouteNumber());
+        route.setId(routeId);
     }
 
     public List<Route> getAllRoutes() throws SQLException {
@@ -28,7 +30,6 @@ public class RouteDao {
                     Route route = new Route();
                     route.setId(rs.getLong(ColumnNames.ID_COLUMN));
                     route.setRouteNumber(rs.getInt(ColumnNames.ROUTE_NUMBER_COLUMN));
-                    route.setForward(rs.getString(ColumnNames.ROUTE_FORWARD_COLUMN));
                     routes.add(route);
                 }
                 return routes;
@@ -44,7 +45,6 @@ public class RouteDao {
                     route = new Route();
                     route.setId(rs.getLong(ColumnNames.ID_COLUMN));
                     route.setRouteNumber(rs.getInt(ColumnNames.ROUTE_NUMBER_COLUMN));
-                    route.setForward(rs.getString(ColumnNames.ROUTE_FORWARD_COLUMN));
                 }
                 return route;
             }
@@ -59,7 +59,6 @@ public class RouteDao {
                     route = new Route();
                     route.setId(resultSet.getLong(ColumnNames.ID_COLUMN));
                     route.setRouteNumber(resultSet.getInt(ColumnNames.ROUTE_NUMBER_COLUMN));
-                    route.setForward(resultSet.getString(ColumnNames.ROUTE_FORWARD_COLUMN));
                 }
                 return route;
             }
@@ -75,6 +74,6 @@ public class RouteDao {
     }
 
     public void updateRoute(Route route) throws SQLException {
-        queryRunner.update(Queries.UPDATE_ROUTE, route.getRouteNumber(), route.getForward(), route.getId());
+        queryRunner.update(Queries.UPDATE_ROUTE, route.getRouteNumber(), route.getId());
     }
 }
