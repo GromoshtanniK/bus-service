@@ -8,6 +8,7 @@ $(function(){
             var placeMarkData = {};
             placeMarkData.cords = placeMark.geometry.getCoordinates();
             placeMarkData.name = placeMark.name;
+            placeMarkData.backWay = placeMark.backWay;
             placeMarkData.times = placeMark.times;
             placeMarkArray.push(placeMarkData);
         }
@@ -62,7 +63,7 @@ function showSavedPlaceMarks(map, initPlaceMarks) {
 
         var mark;
 
-        if(placeMarkData.forward) {
+        if(!placeMarkData.backWay) {
             mark = forward(placeMarkData.coordinates, map);
         } else {
             mark = backward(placeMarkData.coordinates, map);
@@ -75,11 +76,15 @@ function showSavedPlaceMarks(map, initPlaceMarks) {
 }
 
 function forward(cords, map) {
-    return createPlaceMark("./images/avtstn.png", cords, map);
+    var mark = createPlaceMark("./images/avtstn.png", cords, map);
+    mark.backWay = false;
+    return mark;
 }
 
 function backward(cords, map) {
-   return createPlaceMark("./images/trmstn.png", cords, map);
+    var mark = createPlaceMark("./images/trmstn.png", cords, map);
+    mark.backWay = true;
+    return mark;
 }
 
 function createPlaceMark(image, cords, map) {

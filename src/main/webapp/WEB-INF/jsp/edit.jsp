@@ -66,7 +66,7 @@
                             for (RouteStop routeStop : route.getStops()) {
                             %>
                                 {
-                                    forward: <%=routeStop.isBackWay()%>,
+                                    backWay: <%=routeStop.isBackWay()%>,
                                     name: "<%=routeStop.getStopName()%>",
                                     coordinates: [<%=routeStop.getAltitude()%>, <%=routeStop.getLatitude()%>],
                                     times: [

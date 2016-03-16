@@ -60,6 +60,7 @@ public class RouteEditServlet extends HttpServlet {
 
             RouteStop routeStop = new RouteStop();
             routeStop.setStopName(placeMark.getString("name"));
+            routeStop.setIsBackWay(placeMark.getBoolean("backWay"));
             routeStop.setAltitude(placeMark.getJSONArray("cords").getDouble(0));
             routeStop.setLatitude(placeMark.getJSONArray("cords").getDouble(1));
 
