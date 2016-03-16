@@ -13,7 +13,7 @@ public final class Path {
     public static final String INDEX_SERVLET = "/indexServlet";
     public static final String INDEX_JSP = "/WEB-INF/jsp/index.jsp";
     public static final String ROUTE_EDIT_SERVLET = "/edit";
-    public static final String DISPATCH_JSP = "/WEB-INF/jsp/edit.jsp";
+    public static final String EDIT_JSP = "/WEB-INF/jsp/edit.jsp";
     public static final String HEADER_JSP = "/WEB-INF/jsp/header.jsp";
     public static final String ADD_DELETE_SERVLET = "/add_delete";
     public static final String ADD_DELETE_JSP = "/WEB-INF/jsp/add_delete.jsp";

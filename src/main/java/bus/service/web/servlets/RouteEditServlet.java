@@ -23,10 +23,15 @@ public class RouteEditServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Route route = getRoute(req);
+
         if (route != null) {
             req.setAttribute(RequestAttributes.ROUTE, route);
         }
-        req.getRequestDispatcher(Path.DISPATCH_JSP).forward(req, resp);
+
+        RouteService routeService = new RouteService();
+        req.setAttribute(RequestAttributes.ROUTES, routeService.getAllRoutes());
+
+        req.getRequestDispatcher(Path.EDIT_JSP).forward(req, resp);
     }
 
     private Route getRoute(HttpServletRequest request) {

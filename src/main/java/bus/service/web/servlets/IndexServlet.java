@@ -22,6 +22,9 @@ public class IndexServlet extends HttpServlet {
             req.setAttribute(RequestAttributes.ROUTE, route);
         }
 
+        RouteService routeService = new RouteService();
+        req.setAttribute(RequestAttributes.ROUTES, routeService.getAllRoutes());
+
         req.getRequestDispatcher(Path.INDEX_JSP).forward(req, resp);
     }
 

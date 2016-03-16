@@ -1,6 +1,7 @@
 <%@ page import="bus.service.beans.Route" %>
 <%@ page import="bus.service.web.constants.Path" %>
 <%@ page import="bus.service.web.constants.RequestAttributes" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -24,10 +25,20 @@
                 <span class="choose-route">Выберите номер маршрута</span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu">
-                <li><a href="?route=101">101</a></li>
-                <li><a href="?route=102">102</a></li>
-                <li><a href="?route=103">103</a></li>
-                <li><a href="?route=105">105</a></li>
+                <%
+                    List<Route> routes = (List<Route>) request.getAttribute(RequestAttributes.ROUTES);
+                    if (routes != null) {
+                %>
+                <%
+                    for (Route route : routes) {
+                %>
+                <li><a href="?route=<%=route.getRouteNumber()%>"><%=route.getRouteNumber()%></a></li>
+                <%
+                    }
+                %>
+                <%
+                    }
+                %>
             </ul>
         </div>
 

@@ -3,6 +3,7 @@
 <%@ page import="bus.service.web.constants.RequestAttributes" %>
 <%@ page import="bus.service.beans.RouteStop" %>
 <%@ page import="bus.service.beans.StopTime" %>
+<%@ page import="java.util.List" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,7 +14,7 @@
     <link rel="stylesheet" type="text/css" href="css/style.css">
     <script src="js/jQuery.js"></script>
     <script src="js/bootstrap.js"></script>
-    <script src="js/scripts.js"></script>
+    <script src="js/editRouteScript.js"></script>
     <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <meta charset="UTF-8">
     <title>Routes</title>
@@ -27,10 +28,20 @@
                 <span class="choose-route">Выберите маршрут для редактирования</span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu edit-menu">
-                <li><a href="?route=101">101</a></li>
-                <li><a href="?route=102">102</a></li>
-                <li><a href="?route=103">103</a></li>
-                <li><a href="?route=105">105</a></li>
+                <%
+                    List<Route> routes = (List<Route>) request.getAttribute(RequestAttributes.ROUTES);
+                    if (routes != null) {
+                %>
+                    <%
+                        for (Route route : routes) {
+                    %>
+                        <li><a href="?route=<%=route.getRouteNumber()%>"><%=route.getRouteNumber()%></a></li>
+                    <%
+                        }
+                    %>
+                <%
+                    }
+                %>
             </ul>
         </div>
 

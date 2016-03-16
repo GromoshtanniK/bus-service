@@ -80,4 +80,8 @@ public class RouteDao {
     public void deleteRouteByRouteNumber(int routeNumber) throws SQLException {
         queryRunner.update(Queries.DELETE_ROUTE_BY_ROUTE_NUMBER, routeNumber);
     }
+
+    public long findRouteIdByNumber(int routeNumber) throws SQLException {
+        return getRouteByRouteNumber(routeNumber).getId();
+    }
 }

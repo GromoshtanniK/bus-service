@@ -36,14 +36,12 @@ public class RouteService {
 
     public List<Route> getAllRoutes() {
         RouteDao routeDao = new RouteDao();
-        List<Route> routes = new ArrayList<Route>();
-
         try {
-            routes.addAll(routeDao.getAllRoutes());
+            return routeDao.getAllRoutes();
         } catch (SQLException e) {
-            //todo log
+            e.printStackTrace();
         }
-        return routes;
+        return null;
     }
 
     public Route getRouteByRouteNumber(int routeNumber) {
@@ -78,8 +76,8 @@ public class RouteService {
 
         try {
             routeStopDao.deleteRouteStopsByRoute(routeDao.getRouteByRouteNumber(route.getRouteNumber()));
-            routeDao.createRoute(route);
-
+            long routeId = routeDao.findRouteIdByNumber(route.getRouteNumber());
+            route.setId(routeId);
             for (RouteStop routeStop : route.getStops()) {
                 routeStop.setRouteId(route.getId());
                 routeStopDao.createRouteStop(routeStop);
