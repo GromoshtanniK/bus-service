@@ -76,4 +76,8 @@ public class RouteDao {
     public void updateRoute(Route route) throws SQLException {
         queryRunner.update(Queries.UPDATE_ROUTE, route.getRouteNumber(), route.getId());
     }
+
+    public void deleteRouteByRouteNumber(int routeNumber) throws SQLException {
+        queryRunner.update(Queries.DELETE_ROUTE_BY_ROUTE_NUMBER, routeNumber);
+    }
 }

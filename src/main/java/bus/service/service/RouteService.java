@@ -13,6 +13,27 @@ import java.util.List;
 
 public class RouteService {
 
+    public void deleteRouteBuRouteNumber(int routeNumber) {
+        RouteDao routeDao = new RouteDao();
+        try {
+            routeDao.deleteRouteByRouteNumber(routeNumber);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void createRouteByRouteNumber(int routeNumber) {
+        RouteDao routeDao = new RouteDao();
+        Route route = new Route();
+        route.setRouteNumber(routeNumber);
+        try {
+            routeDao.createRoute(route);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+
     public List<Route> getAllRoutes() {
         RouteDao routeDao = new RouteDao();
         List<Route> routes = new ArrayList<Route>();
@@ -56,7 +77,7 @@ public class RouteService {
         StopTimeDao stopTimeDao = new StopTimeDao();
 
         try {
-            routeDao.deleteRouteById(routeDao.getRouteByRouteNumber(route.getRouteNumber()).getId());
+            routeStopDao.deleteRouteStopsByRoute(routeDao.getRouteByRouteNumber(route.getRouteNumber()));
             routeDao.createRoute(route);
 
             for (RouteStop routeStop : route.getStops()) {

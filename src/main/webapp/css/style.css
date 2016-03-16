@@ -243,3 +243,53 @@ body {
     margin-right: 10px;
     padding: 5px;
 }
+
+.route-save-field {
+    display: inline !important;
+    width: 200px !important;
+    margin-right: 20px;
+}
+
+.route-save-button {
+    vertical-align: top !important;
+    height: 34px !important;
+}
+
+.route-save-label {
+    margin-right: 20px;
+    font-weight: 200;
+}
+
+.edit-menu {
+    width: 334px !important;
+}
+
+
+.routes {
+    margin-top: 70px
+}
+
+.routes .route {
+    width: 250px;
+    margin: 10px auto;
+    height: 40px;
+    background-color: #c0eaed;
+}
+
+.routes .route .route-number {
+    display: inline-block;
+    line-height: 40px;
+    padding-left: 20px;
+    float: left;
+    font-weight: 600;
+}
+
+.delete-route-btn {
+    height: 40px;
+    width: 40px;
+    float: right;
+}
+
+.minus {
+    padding-top: 5px;
+}

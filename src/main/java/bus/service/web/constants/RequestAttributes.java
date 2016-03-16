@@ -8,4 +8,5 @@ public final class RequestAttributes {
     public final static String LOG_OUT = "logout";
     public static final String ROUTE_NUMBER = "route";
     public static final String ROUTE = "route";
+    public static final String ROUTES = "routes";
 }

@@ -24,9 +24,9 @@
     <div class="content">
         <div class="btn-group">
             <button id="choose_route" type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                <span class="choose-route">Выберите номер маршрута</span> <span class="caret"></span>
+                <span class="choose-route">Выберите маршрут для редактирования</span> <span class="caret"></span>
             </button>
-            <ul class="dropdown-menu">
+            <ul class="dropdown-menu edit-menu">
                 <li><a href="?route=101">101</a></li>
                 <li><a href="?route=102">102</a></li>
                 <li><a href="?route=103">103</a></li>

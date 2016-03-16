@@ -8,6 +8,7 @@ public abstract class Queries {
     public static final String SELECT_ROUTE_BY_ROUTE_NUMBER = "SELECT * FROM bus_service.route WHERE route_number = ?";
     public static final String SELECT_ROUTE_BY_ID = "SELECT * FROM bus_service.route WHERE id = ?";
     public static final String DELETE_ROUTE_BY_ID = "DELETE FROM bus_service.route WHERE id = ?";
+    public static final String DELETE_ROUTE_BY_ROUTE_NUMBER = "DELETE FROM bus_service.route WHERE route_number = ?";
 
     //route_stop
     public static final String INSERT_ROUTE_STOP = "INSERT INTO bus_service.route_stop " +
