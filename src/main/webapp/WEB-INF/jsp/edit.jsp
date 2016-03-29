@@ -71,28 +71,40 @@
         </div>
 
         <script>
+            <%--initMap([59.977693264318, 30.324142490948248], <%=route.getRouteNumber()%>,--%>
+                    <%--[--%>
+                            <%--<%--%>
+                            <%--for (RouteStop routeStop : route.getStops()) {--%>
+                            <%--%>--%>
+                                <%--{--%>
+                                    <%--backWay: <%=routeStop.isBackWay()%>,--%>
+                                    <%--name: "<%=routeStop.getStopName()%>",--%>
+                                    <%--coordinates: [<%=routeStop.getAltitude()%>, <%=routeStop.getLatitude()%>],--%>
+                                    <%--times: [--%>
+                                    <%--<%--%>
+                                        <%--for (StopTime stopTime : routeStop.getStopTimes()) {--%>
+                                        <%--%>--%>
+                                            <%--{hours: <%=stopTime.getHours()%>, minutes: <%=stopTime.getMinutes()%>},--%>
+                                        <%--<%--%>
+                                        <%--}--%>
+                                    <%--%>--%>
+                                    <%--]--%>
+                                <%--},--%>
+                            <%--<%--%>
+                            <%--}--%>
+                            <%--%>--%>
+                    <%--]);--%>
+
+
             initMap([59.977693264318, 30.324142490948248], <%=route.getRouteNumber()%>,
                     [
-                            <%
-                            for (RouteStop routeStop : route.getStops()) {
-                            %>
-                                {
-                                    backWay: <%=routeStop.isBackWay()%>,
-                                    name: "<%=routeStop.getStopName()%>",
-                                    coordinates: [<%=routeStop.getAltitude()%>, <%=routeStop.getLatitude()%>],
-                                    times: [
-                                    <%
-                                        for (StopTime stopTime : routeStop.getStopTimes()) {
-                                        %>
-                                            {hours: <%=stopTime.getHours()%>, minutes: <%=stopTime.getMinutes()%>},
-                                        <%
-                                        }
-                                    %>
-                                    ]
-                                },
-                            <%
-                            }
-                            %>
+                        {
+                            name: "123",
+                            times: [],
+                            id: 123,
+                            cords: [59.977693264318, 30.324142490948248],
+                            backWay : true
+                        }
                     ]);
         </script>
         <%

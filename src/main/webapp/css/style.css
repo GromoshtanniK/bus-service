@@ -293,3 +293,10 @@ body {
 .minus {
     padding-top: 5px;
 }
+
+.delete-stop-time {
+    width: 36px;
+    height: 40px;
+    margin-left: 16px;
+    position: absolute;
+}
