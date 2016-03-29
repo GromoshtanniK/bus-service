@@ -12,9 +12,9 @@ function showPlaceMarks(initPlaceMarks) {
 
         var mark;
         if(!placeMarkData.backWay) {
-            mark = createPlaceMark("./images/avtstn.png", placeMarkData.coordinates);
+            mark = createPlaceMark("./images/forward.png", placeMarkData.coordinates);
         } else {
-            mark = createPlaceMark("./images/trmstn.png", placeMarkData.coordinates);
+            mark = createPlaceMark("./images/backward.png", placeMarkData.coordinates);
         }
         mark.name = placeMarkData.name;
         mark.times = placeMarkData.times;
