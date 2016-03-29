@@ -1,4 +1,3 @@
-
 //var TEMPdata = {
 //    name: "",
 //    times: [{hours: 1, minutes: 2}, {}],
@@ -10,38 +9,39 @@
 
 function setUpSaveButton(yMap, route, initPlaceMarks) {
     $("#save_route").click(function () {
-        console.log(initPlaceMarks);
         var len = yMap.geoObjects.getLength();
 
-        //var placeMarkArray = [];
+        var placeMarks = [];
+
         for (var i = 0; i < len; i++) {
             var placeMark = yMap.geoObjects.get(i);
-            console.log(placeMark.data);
-
-            //var placeMarkData = {};
-            //placeMarkData.cords = placeMark.geometry.getCoordinates();
-            //placeMarkData.name = placeMark.name;
-            //placeMarkData.backWay = placeMark.backWay;
-            //placeMarkData.times = placeMark.times;
-            //placeMarkArray.push(placeMarkData);
+            placeMark.data.cords = placeMark.geometry.getCoordinates();
+            placeMarks.push(placeMark.data);
         }
 
-
-        //$.ajax({
-        //    type: "POST",
-        //    url: "/edit",
-        //    data: JSON.stringify({
-        //        routeNumber: routeNumber,
-        //        placeMarks: placeMarkArray
-        //    }),
-        //    contentType: "application/json; charset=utf-8",
-        //    dataType: "json",
-        //    success: function (data) {
-        //        alert(data);
-        //    }
-        //});
+        recognizeChanges(initPlaceMarks, placeMarks);
 
     });
+}
+
+function recognizeChanges(initPlaceMarks, placeMarks) {
+    console.log(initPlaceMarks);
+    console.log(placeMarks);
+
+    //Примерный алгоритм
+    // 1) сортируем на есть ид и нет
+
+
+}
+
+function trimPlaceMarkTimes(times) {
+    var timesWithoutUndefined = [];
+    for (var i = 0; i < times.length; i++) {
+        if (times[i] !== undefined) {
+            timesWithoutUndefined[timesWithoutUndefined.length] = times[i];
+        }
+    }
+    return timesWithoutUndefined;
 }
 
 function initMap(c, route, initPlaceMarks) {
@@ -95,8 +95,7 @@ function initMap(c, route, initPlaceMarks) {
 function setUpSavedPlaceMarks(yMap, initPlaceMarks) {
 
     for (var i = 0; i < initPlaceMarks.length; i++) {
-        var data = initPlaceMarks[i];
-
+        var data = $.extend(true, {}, initPlaceMarks[i]);
         var placeMark;
 
         if (data.backWay) {
