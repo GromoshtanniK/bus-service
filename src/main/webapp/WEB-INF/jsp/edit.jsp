@@ -100,7 +100,7 @@
                     [
                         {
                             name: "123",
-                            times: [{hours: 1, minutes: 2}, {hours: 3, minutes: 4}],
+                            times: [{hours: "1", minutes: "2", id: 1}, {hours: "3", minutes: "4", id: 2}],
                             id: 1,
                             cords: [59.977693264318, 30.324142490948248],
                             backWay : true

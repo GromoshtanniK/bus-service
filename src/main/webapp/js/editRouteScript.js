@@ -6,6 +6,17 @@
 //    backWay: true
 //};
 
+var deletedStops = [];
+var newStops = [];
+var changedStops = [];
+
+function trimTime(placeMarkArray) {
+    for(var i = 0; i < placeMarkArray.length; i++) {
+        placeMarkArray[i].times = trimPlaceMarkTimes(placeMarkArray[i].times);
+    }
+
+}
+
 
 function setUpSaveButton(yMap, route, initPlaceMarks) {
     $("#save_route").click(function () {
@@ -21,20 +32,139 @@ function setUpSaveButton(yMap, route, initPlaceMarks) {
 
         recognizeChanges(initPlaceMarks, placeMarks);
 
+        trimTime(deletedStops);
+        trimTime(newStops);
+        trimTime(changedStops);
+
+
+        console.log("DELETED");
+        console.log(deletedStops);
+
+        console.log("NEW");
+        console.log(newStops);
+
+        console.log("CHANGED");
+        console.log(changedStops);
+
+        //location.reload();
     });
 }
 
+function findDeletedStops(initPlaceMarks, placeMarks) {
+    for(var i = 0; i < initPlaceMarks.length; i++) {
+        if(findInArrayById(placeMarks, initPlaceMarks[i].id) == undefined) {
+            deletedStops.push(initPlaceMarks[i]);
+        }
+    }
+}
+
+function findInArrayById(array, id) {
+    for(var i = 0; i < array.length; i++) {
+        if(array[i].id == id) {
+            return array[i];
+        }
+    }
+    return undefined;
+}
+
+function findNewStops(placeMarks) {
+    for (var i = 0; i < placeMarks.length; i++) {
+        if(placeMarks[i].id == 0) {
+            newStops.push(placeMarks[i]);
+        }
+    }
+}
+
+function timesDiffers(initTimes, currentTimes, currentPlaceMark) {
+
+    var deletedTimes = [];
+    var addedTimes = [];
+    var changedTimes = [];
+
+    for (var i = 0; i < currentTimes.length; i++) {
+        if(currentTimes[i] == undefined && initTimes[i] != undefined) { //время удалено, но возможно в оригинальном объекте ее и не было
+            deletedTimes.push(initTimes[i]);
+        }
+
+        if(initTimes[i] == undefined && currentTimes[i] != undefined) { //время добавлено, но возможно в дальнейшем удалено
+            addedTimes.push(currentTimes[i]);
+        }
+
+        if(currentTimes[i] != undefined && initTimes[i] != undefined) {
+            if(currentTimes[i].hours != initTimes[i].hours || currentTimes[i].minutes != initTimes[i].minutes) {
+                changedTimes.push(currentTimes[i]);
+            }
+        }
+
+        currentPlaceMark.deletedTime = deletedTimes;
+        currentPlaceMark.addedTimes = addedTimes;
+        currentPlaceMark.changedTimes = changedTimes;
+    }
+
+    if(deletedTimes.length != 0 || addedTimes.length != 0 || changedTimes.length != 0) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
+
+function findChangedStops(initPlaceMarks, placeMarks) {
+    for (var i = 0; i < initPlaceMarks.length; i++) {
+        var mark = findInArrayById(placeMarks, initPlaceMarks[i].id);
+        if(mark != undefined) { //точка существовала и не удалена
+
+            var deletedTimes = [];
+            var addedTimes = [];
+            var changedTimes = [];
+
+            var changedName = false;
+            var changedCords = false;
+            var changedTime = false;
+
+            if(initPlaceMarks[i].name != mark.name) {
+                changedName = true;
+            }
+
+            if(initPlaceMarks[i].cords[0] != mark.cords[0] || initPlaceMarks[i].cords[1] != mark.cords[1]) {
+                changedCords = true;
+            }
+
+            if(changedName || changedCords) {
+                mark.deletedTime = deletedTimes;
+                mark.addedTimes = addedTimes;
+                mark.changedTimes = changedTimes;
+            }
+
+            if(timesDiffers(initPlaceMarks[i].times, mark.times, mark)) {
+                changedTime = true;
+            }
+
+            if(changedName || changedCords || changedTime) {
+                mark.changedName = changedName;
+                mark.changedCords = changedCords;
+                changedStops.push(mark);
+            }
+        }
+    }
+}
+
 function recognizeChanges(initPlaceMarks, placeMarks) {
-    console.log(initPlaceMarks);
-    console.log(placeMarks);
+    deletedStops = [];
+    newStops = [];
+    changedStops = [];
 
-    //Примерный алгоритм
-    // 1) сортируем на есть ид и нет
-
-
+    findDeletedStops(initPlaceMarks, placeMarks);
+    findNewStops(placeMarks);
+    findChangedStops(initPlaceMarks, placeMarks);
 }
 
 function trimPlaceMarkTimes(times) {
+
+    if(times == undefined) {
+        return times;
+    }
+
     var timesWithoutUndefined = [];
     for (var i = 0; i < times.length; i++) {
         if (times[i] !== undefined) {
@@ -189,7 +319,7 @@ function showTimePanel(e) {
     });
 
     add.find(".add-stop-time").click(function () {
-        data.times[data.times.length] = {hours: "", minutes: ""};
+        data.times[data.times.length] = {hours: "", minutes: "", id: 0};
         timeTable.empty();
         showTimes(timeTable, data, e);
     });
