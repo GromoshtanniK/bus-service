@@ -37,6 +37,8 @@ function setUpSaveButton(yMap, route, initPlaceMarks) {
         trimTime(changedStops);
 
 
+
+
         console.log("DELETED");
         console.log(deletedStops);
 
@@ -46,7 +48,25 @@ function setUpSaveButton(yMap, route, initPlaceMarks) {
         console.log("CHANGED");
         console.log(changedStops);
 
-        //location.reload();
+        $.ajax({
+            type: "POST",
+            url: "/edit",
+            data: JSON.stringify({
+                routeNumber: route,
+                deleted: deletedStops,
+                added: newStops,
+                changed: changedStops
+            }),
+
+            contentType: "application/json; charset=utf-8",
+            dataType: "json",
+            success: function(data){alert(data);},
+            failure: function(errMsg) {
+                alert(errMsg);
+            }
+        });
+
+        location.reload();
     });
 }
 
