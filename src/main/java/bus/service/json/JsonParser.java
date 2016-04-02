@@ -1,6 +1,8 @@
 package bus.service.json;
 
 
+import bus.service.beans.RouteStop;
+import bus.service.beans.StopTime;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -27,92 +29,94 @@ public class JsonParser {
         return builder.toString();
     }
 
-    public SavingRoute parseSaveRouteRequest() {
+    public EditRoute parseEditRouteRequest() {
 
         JSONObject saveRoute = new JSONObject(json);
-        SavingRoute route = new SavingRoute();
+        EditRoute route = new EditRoute();
         route.setRouteNumber(saveRoute.getInt("routeNumber"));
 
-        List<SavingStop> deletedStops = parseSavingStopsFromJson(saveRoute.getJSONArray("deleted"));
+        List<RouteStop> deletedStops = parseRouteStopsFromJson(saveRoute.getJSONArray("deleted"));
         route.setDeleted(deletedStops);
 
-        List<SavingStop> added = parseSavingStopsFromJson(saveRoute.getJSONArray("added"));
+        List<RouteStop> added = parseRouteStopsFromJson(saveRoute.getJSONArray("added"));
         route.setAdded(added);
 
-        List<ChangedSavingStop> changed = parseChangedSavingStopsFromJson(saveRoute.getJSONArray("changed"));
+        List<ChangedStop> changed = parseChangedSavingStopsFromJson(saveRoute.getJSONArray("changed"));
         route.setChanged(changed);
 
         return route;
     }
 
-    private List<ChangedSavingStop> parseChangedSavingStopsFromJson(JSONArray changedSavingStopsJsonArray) {
-        List<ChangedSavingStop> changedSavingStops = new ArrayList<ChangedSavingStop>();
+    private List<ChangedStop> parseChangedSavingStopsFromJson(JSONArray changedSavingStopsJsonArray) {
+        List<ChangedStop> changedSavingStops = new ArrayList<ChangedStop>();
 
         for (int i = 0; i < changedSavingStopsJsonArray.length(); i++) {
             JSONObject stopJson = changedSavingStopsJsonArray.getJSONObject(i);
 
-            ChangedSavingStop changedSavingStop = new ChangedSavingStop();
-            changedSavingStop.setId(stopJson.getLong("id"));
-            changedSavingStop.setName(stopJson.getString("name"));
-            changedSavingStop.setBackWay(stopJson.getBoolean("backWay"));
-            changedSavingStop.setAltitude(stopJson.getJSONArray("cords").getDouble(0));
-            changedSavingStop.setLatitude(stopJson.getJSONArray("cords").getDouble(1));
+            ChangedStop changedStop = new ChangedStop();
+            changedStop.setId(stopJson.getLong("id"));
+            changedStop.setStopName(stopJson.getString("name"));
+            changedStop.setIsBackWay(stopJson.getBoolean("backWay"));
+            changedStop.setAltitude(stopJson.getJSONArray("cords").getDouble(0));
+            changedStop.setLatitude(stopJson.getJSONArray("cords").getDouble(1));
+            changedStop.setRouteId(stopJson.getLong("routeId"));
 
-            List<Time> times = parseTimesFromJson(stopJson.getJSONArray("times"));
-            changedSavingStop.setTimes(times);
+            List<bus.service.beans.StopTime> times = parseTimesFromJson(stopJson.getJSONArray("times"));
+            changedStop.setStopTimes(times);
 
-            changedSavingStop.setChangedName(stopJson.getBoolean("changedName"));
-            changedSavingStop.setChangedCords(stopJson.getBoolean("changedCords"));
+            changedStop.setChangedName(stopJson.getBoolean("changedName"));
+            changedStop.setChangedCords(stopJson.getBoolean("changedCords"));
 
-            List<Time> changedTimes = parseTimesFromJson(stopJson.getJSONArray("changedTimes"));
-            changedSavingStop.setChangedTimes(changedTimes);
+            List<StopTime> changedTimes = parseTimesFromJson(stopJson.getJSONArray("changedTimes"));
+            changedStop.setChangedTimes(changedTimes);
 
-            List<Time> addedTimes = parseTimesFromJson(stopJson.getJSONArray("addedTimes"));
-            changedSavingStop.setAddedTimes(addedTimes);
+            List<StopTime> addedTimes = parseTimesFromJson(stopJson.getJSONArray("addedTimes"));
+            changedStop.setAddedTimes(addedTimes);
 
-            List<Time> deletedTimes = parseTimesFromJson(stopJson.getJSONArray("deletedTime"));
-            changedSavingStop.setDeletedTime(deletedTimes);
+            List<StopTime> deletedTimes = parseTimesFromJson(stopJson.getJSONArray("deletedTime"));
+            changedStop.setDeletedTime(deletedTimes);
 
 
-            changedSavingStops.add(changedSavingStop);
+            changedSavingStops.add(changedStop);
         }
 
 
         return changedSavingStops;
     }
 
-    private List<SavingStop> parseSavingStopsFromJson(JSONArray savingStopsJsonArray) {
-        List<SavingStop> savingStops = new ArrayList<SavingStop>();
+    private List<RouteStop> parseRouteStopsFromJson(JSONArray savingStopsJsonArray) {
+        List<RouteStop> savingStops = new ArrayList<RouteStop>();
 
         for (int i = 0; i < savingStopsJsonArray.length(); i++) {
             JSONObject stopJson = savingStopsJsonArray.getJSONObject(i);
 
-            SavingStop savingStop = new SavingStop();
-            savingStop.setId(stopJson.getLong("id"));
-            savingStop.setName(stopJson.getString("name"));
-            savingStop.setBackWay(stopJson.getBoolean("backWay"));
-            savingStop.setAltitude(stopJson.getJSONArray("cords").getDouble(0));
-            savingStop.setLatitude(stopJson.getJSONArray("cords").getDouble(1));
+            RouteStop routeStop = new RouteStop();
+            routeStop.setId(stopJson.getLong("id"));
+            routeStop.setStopName(stopJson.getString("name"));
+            routeStop.setIsBackWay(stopJson.getBoolean("backWay"));
+            routeStop.setAltitude(stopJson.getJSONArray("cords").getDouble(0));
+            routeStop.setLatitude(stopJson.getJSONArray("cords").getDouble(1));
+            routeStop.setRouteId(stopJson.getLong("routeId"));
 
+            List<bus.service.beans.StopTime> times = parseTimesFromJson(stopJson.getJSONArray("times"));
+            routeStop.setStopTimes(times);
 
-            List<Time> times = parseTimesFromJson(stopJson.getJSONArray("times"));
-            savingStop.setTimes(times);
-
-            savingStops.add(savingStop);
+            savingStops.add(routeStop);
         }
 
         return savingStops;
     }
 
-    private List<Time> parseTimesFromJson(JSONArray timesJsonArray) {
-        List<Time> times = new ArrayList<Time>();
+    private List<bus.service.beans.StopTime> parseTimesFromJson(JSONArray timesJsonArray) {
+        List<bus.service.beans.StopTime> times = new ArrayList<bus.service.beans.StopTime>();
 
         for (int i = 0; i < timesJsonArray.length(); i++) {
             JSONObject timeJson = timesJsonArray.getJSONObject(i);
-            Time time = new Time();
+            bus.service.beans.StopTime time = new bus.service.beans.StopTime();
             time.setId(timeJson.getLong("id"));
             time.setHours(timeJson.getInt("hours"));
             time.setMinutes(timeJson.getInt("minutes"));
+            time.setRouteStopId(timeJson.getLong("roteStopId"));
             times.add(time);
         }
 

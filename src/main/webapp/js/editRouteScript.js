@@ -17,7 +17,6 @@ function trimTime(placeMarkArray) {
 
 }
 
-
 function setUpSaveButton(yMap, route, initPlaceMarks) {
     $("#save_route").click(function () {
         var len = yMap.geoObjects.getLength();
@@ -35,9 +34,6 @@ function setUpSaveButton(yMap, route, initPlaceMarks) {
         trimTime(deletedStops);
         trimTime(newStops);
         trimTime(changedStops);
-
-
-
 
         console.log("DELETED");
         console.log(deletedStops);
@@ -197,7 +193,7 @@ function trimPlaceMarkTimes(times) {
     return timesWithoutUndefined;
 }
 
-function initMap(c, route, initPlaceMarks) {
+function initMap(routeId, c, route, initPlaceMarks) {
     ymaps.ready(function () {
         var yMap = new ymaps.Map('map', {center: c, zoom: 12, controls: ['zoomControl', 'fullscreenControl']});
         setUpSaveButton(yMap, route, initPlaceMarks);
@@ -221,7 +217,8 @@ function initMap(c, route, initPlaceMarks) {
                         name: "",
                         times: [],
                         id: 0,
-                        cords: cords
+                        cords: cords,
+                        routeId: routeId
                     };
 
                     if (isBackWay) {
@@ -342,7 +339,7 @@ function showTimePanel(e) {
     });
 
     add.find(".add-stop-time").click(function () {
-        data.times[data.times.length] = {hours: "", minutes: "", id: 0};
+        data.times[data.times.length] = {hours: "", minutes: "", id: 0, roteStopId: data.id};
         timeTable.empty();
         showTimes(timeTable, data, e);
     });

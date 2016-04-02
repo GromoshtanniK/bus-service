@@ -1,15 +1,18 @@
 package bus.service.json;
 
+import bus.service.beans.RouteStop;
+import bus.service.beans.StopTime;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class ChangedSavingStop extends SavingStop {
+public class ChangedStop extends RouteStop {
+
     private boolean changedName;
     private boolean changedCords;
-    private List<Time> deletedTime = new ArrayList<Time>();
-    private List<Time> addedTimes = new ArrayList<Time>();
-    private List<Time> changedTimes = new ArrayList<Time>();
+    private List<StopTime> deletedTime = new ArrayList<StopTime>();
+    private List<StopTime> addedTimes = new ArrayList<StopTime>();
+    private List<StopTime> changedTimes = new ArrayList<StopTime>();
 
     public boolean isChangedName() {
         return changedName;
@@ -27,27 +30,27 @@ public class ChangedSavingStop extends SavingStop {
         this.changedCords = changedCords;
     }
 
-    public List<Time> getDeletedTime() {
+    public List<StopTime> getDeletedTime() {
         return deletedTime;
     }
 
-    public void setDeletedTime(List<Time> deletedTime) {
+    public void setDeletedTime(List<StopTime> deletedTime) {
         this.deletedTime = deletedTime;
     }
 
-    public List<Time> getAddedTimes() {
+    public List<StopTime> getAddedTimes() {
         return addedTimes;
     }
 
-    public void setAddedTimes(List<Time> addedTimes) {
+    public void setAddedTimes(List<StopTime> addedTimes) {
         this.addedTimes = addedTimes;
     }
 
-    public List<Time> getChangedTimes() {
+    public List<StopTime> getChangedTimes() {
         return changedTimes;
     }
 
-    public void setChangedTimes(List<Time> changedTimes) {
+    public void setChangedTimes(List<StopTime> changedTimes) {
         this.changedTimes = changedTimes;
     }
 }
