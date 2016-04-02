@@ -59,14 +59,17 @@ function setUpSaveButton(yMap, route, initPlaceMarks) {
             }),
 
             contentType: "application/json; charset=utf-8",
-            dataType: "json",
-            success: function(data){alert(data);},
-            failure: function(errMsg) {
-                alert(errMsg);
+
+            success: function() {
+                location.reload();
+            },
+            complete : function() {
+                console.log(123123);
+            },
+            error: function (XMLHttpRequest, textStatus, errorThrown) {
+
             }
         });
-
-        location.reload();
     });
 }
 
