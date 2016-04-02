@@ -19,7 +19,7 @@ public class StopTimeDao {
 
     QueryRunner queryRunner = new QueryRunner(DB.getDataSource());
 
-    public void createStopTime(StopTime stopTime) throws SQLException {
+    public void addStopTime(StopTime stopTime) throws SQLException {
         long stopTimeId = queryRunner.insert(Queries.INSERT_STOP_TIME, new ScalarHandler<Long>(), stopTime.getHours(), stopTime.getMinutes(), stopTime.getRouteStopId());
         stopTime.setId(stopTimeId);
     }

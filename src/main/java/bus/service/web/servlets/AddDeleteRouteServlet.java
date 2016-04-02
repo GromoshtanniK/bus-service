@@ -15,9 +15,11 @@ import java.util.List;
 
 @WebServlet(urlPatterns = Path.ADD_DELETE_SERVLET)
 public class AddDeleteRouteServlet extends HttpServlet {
+
+    RouteService routeService = new RouteService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RouteService routeService = new RouteService();
         List<Route> routes = routeService.getAllRoutes();
         req.setAttribute(RequestAttributes.ROUTES, routes);
         req.getRequestDispatcher(Path.ADD_DELETE_JSP).forward(req, resp);
@@ -40,13 +42,11 @@ public class AddDeleteRouteServlet extends HttpServlet {
     }
 
     private void delete(String routeNumber) {
-        RouteService routeService = new RouteService();
         routeService.deleteRouteBuRouteNumber(Integer.valueOf(routeNumber));
     }
 
 
     private void add(String routeNumber) {
-        RouteService routeService = new RouteService();
         routeService.createRouteByRouteNumber(Integer.valueOf(routeNumber));
     }
 

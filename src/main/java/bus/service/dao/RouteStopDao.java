@@ -19,7 +19,7 @@ public class RouteStopDao {
 
     QueryRunner queryRunner = new QueryRunner(DB.getDataSource());
 
-    public void createRouteStop(RouteStop routeStop) throws SQLException {
+    public void addRouteStop(RouteStop routeStop) throws SQLException {
         long routeStopId = queryRunner.insert(Queries.INSERT_ROUTE_STOP, new ScalarHandler<Long>(), routeStop.getAltitude(), routeStop.getLatitude(), routeStop.getStopName(),
                 routeStop.isBackWay(), routeStop.getRouteId());
         routeStop.setId(routeStopId);

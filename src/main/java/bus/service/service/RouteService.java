@@ -8,7 +8,6 @@ import bus.service.dao.RouteStopDao;
 import bus.service.dao.StopTimeDao;
 
 import java.sql.SQLException;
-import java.util.ArrayList;
 import java.util.List;
 
 public class RouteService {
@@ -66,31 +65,6 @@ public class RouteService {
             //todo log
         }
         return route;
-    }
-
-    public void deleteAndCreateNewRoute(Route route) {
-
-        RouteDao routeDao = new RouteDao();
-        RouteStopDao routeStopDao = new RouteStopDao();
-        StopTimeDao stopTimeDao = new StopTimeDao();
-
-        try {
-            routeStopDao.deleteRouteStopsByRoute(routeDao.getRouteByRouteNumber(route.getRouteNumber()));
-            long routeId = routeDao.findRouteIdByNumber(route.getRouteNumber());
-            route.setId(routeId);
-            for (RouteStop routeStop : route.getStops()) {
-                routeStop.setRouteId(route.getId());
-                routeStopDao.createRouteStop(routeStop);
-
-                for (StopTime stopTime : routeStop.getStopTimes()) {
-                    stopTime.setRouteStopId(routeStop.getId());
-                    stopTimeDao.createStopTime(stopTime);
-                }
-
-            }
-        } catch (SQLException e) {
-            //todo log
-        }
     }
 
     public void updateRoute(Route route) {

@@ -2,7 +2,7 @@ package bus.service.web.servlets;
 
 import bus.service.beans.Route;
 import bus.service.json.*;
-import bus.service.service.NewRouteService;
+import bus.service.service.EditRouteService;
 import bus.service.service.RouteService;
 import bus.service.web.constants.Path;
 import bus.service.web.constants.RequestAttributes;
@@ -16,6 +16,9 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = Path.ROUTE_EDIT_SERVLET)
 public class RouteEditServlet extends HttpServlet {
+
+    RouteService routeService = new RouteService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         Route route = getRoute(req);
@@ -24,14 +27,11 @@ public class RouteEditServlet extends HttpServlet {
             req.setAttribute(RequestAttributes.ROUTE, route);
         }
 
-        RouteService routeService = new RouteService();
         req.setAttribute(RequestAttributes.ROUTES, routeService.getAllRoutes());
-
         req.getRequestDispatcher(Path.EDIT_JSP).forward(req, resp);
     }
 
     private Route getRoute(HttpServletRequest request) {
-        RouteService routeService = new RouteService();
         String routeNumberParameter = request.getParameter(RequestAttributes.ROUTE_NUMBER);
         if (routeNumberParameter != null) {
             int routeNumber = Integer.valueOf(routeNumberParameter);
@@ -44,10 +44,8 @@ public class RouteEditServlet extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         JsonParser parser = new JsonParser(req.getReader());
         EditRoute editRoute = parser.parseEditRouteRequest();
-
-
-        NewRouteService routeService = new NewRouteService();
-        routeService.saveRoute(editRoute);
+        EditRouteService routeService = new EditRouteService();
+        routeService.applyEditRouteChanges(editRoute);
     }
 
 }

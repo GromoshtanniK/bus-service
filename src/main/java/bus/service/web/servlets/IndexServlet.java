@@ -14,22 +14,21 @@ import java.io.IOException;
 
 @WebServlet(urlPatterns = Path.INDEX_SERVLET)
 public class IndexServlet extends HttpServlet {
+
+    RouteService routeService = new RouteService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-
         Route route = getRoute(req);
         if (route != null) {
             req.setAttribute(RequestAttributes.ROUTE, route);
         }
 
-        RouteService routeService = new RouteService();
         req.setAttribute(RequestAttributes.ROUTES, routeService.getAllRoutes());
-
         req.getRequestDispatcher(Path.INDEX_JSP).forward(req, resp);
     }
 
     private Route getRoute(HttpServletRequest request) {
-        RouteService routeService = new RouteService();
         String routeNumberParameter = request.getParameter(RequestAttributes.ROUTE_NUMBER);
         if (routeNumberParameter != null) {
             int routeNumber = Integer.valueOf(routeNumberParameter);

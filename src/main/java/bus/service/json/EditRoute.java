@@ -22,7 +22,7 @@ public class EditRoute {
         this.routeNumber = routeNumber;
     }
 
-    public List<RouteStop> getDeleted() {
+    public List<RouteStop> getDeletedStopRoutes() {
         return deleted;
     }
 
@@ -30,7 +30,7 @@ public class EditRoute {
         this.deleted = deleted;
     }
 
-    public List<RouteStop> getAdded() {
+    public List<RouteStop> getAddedRouteStops() {
         return added;
     }
 
