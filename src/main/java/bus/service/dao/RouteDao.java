@@ -37,20 +37,6 @@ public class RouteDao {
         });
     }
 
-    public Route getRouteById(long id) throws SQLException {
-        return queryRunner.query(Queries.SELECT_ROUTE_BY_ID, new ResultSetHandler<Route>() {
-            public Route handle(ResultSet rs) throws SQLException {
-                Route route = null;
-                while (rs.next()) {
-                    route = new Route();
-                    route.setId(rs.getLong(ColumnNames.ID_COLUMN));
-                    route.setRouteNumber(rs.getInt(ColumnNames.ROUTE_NUMBER_COLUMN));
-                }
-                return route;
-            }
-        }, id);
-    }
-
     public Route getRouteByRouteNumber(int routeNumber) throws SQLException {
         return queryRunner.query(Queries.SELECT_ROUTE_BY_ROUTE_NUMBER, new ResultSetHandler<Route>() {
             public Route handle(ResultSet resultSet) throws SQLException {
@@ -65,23 +51,11 @@ public class RouteDao {
         }, routeNumber);
     }
 
-    public void deleteRouteById(long id) throws SQLException {
-        queryRunner.update(Queries.DELETE_ROUTE_BY_ID, id);
-    }
-
-    public void deleteRoute(Route route) throws SQLException {
-        deleteRouteById(route.getId());
-    }
-
     public void updateRoute(Route route) throws SQLException {
         queryRunner.update(Queries.UPDATE_ROUTE, route.getRouteNumber(), route.getId());
     }
 
     public void deleteRouteByRouteNumber(int routeNumber) throws SQLException {
         queryRunner.update(Queries.DELETE_ROUTE_BY_ROUTE_NUMBER, routeNumber);
-    }
-
-    public long findRouteIdByNumber(int routeNumber) throws SQLException {
-        return getRouteByRouteNumber(routeNumber).getId();
     }
 }
