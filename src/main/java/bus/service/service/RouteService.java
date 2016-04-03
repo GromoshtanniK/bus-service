@@ -12,10 +12,11 @@ import java.util.List;
 
 public class RouteService {
 
-    public void deleteRouteBuRouteNumber(int routeNumber) {
-        RouteDao routeDao = new RouteDao();
+    private RouteDao routeDao = new RouteDao();
+
+    public void deleteRouteById(long routeId) {
         try {
-            routeDao.deleteRouteByRouteNumber(routeNumber);
+            routeDao.deleteRouteById(routeId);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -14,11 +14,11 @@ $(function(){
 
     $(".delete-route-btn").click(function(){
 
-        var route = $(this).data("route");
+        var routeId = $(this).data("route");
         $.post({
             url: "/add_delete",
             data: {
-                delete: route
+                delete: routeId
             },
             complete: function() {
                 location.reload();

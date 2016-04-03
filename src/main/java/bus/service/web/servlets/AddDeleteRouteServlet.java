@@ -34,15 +34,15 @@ public class AddDeleteRouteServlet extends HttpServlet {
             add(addRouteNumber);
         }
 
-        String deleteRouteNumber = req.getParameter("delete");
-        if (deleteRouteNumber != null) {
-            delete(deleteRouteNumber);
+        String deleteRouteId = req.getParameter("delete");
+        if (deleteRouteId != null) {
+            delete(deleteRouteId);
         }
 
     }
 
-    private void delete(String routeNumber) {
-        routeService.deleteRouteBuRouteNumber(Integer.valueOf(routeNumber));
+    private void delete(String routeId) {
+        routeService.deleteRouteById(Long.valueOf(routeId));
     }
 
 

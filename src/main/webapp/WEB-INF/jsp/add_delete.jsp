@@ -39,7 +39,7 @@
             %>
             <div class="route">
                 <div class="route-number"><%=route.getRouteNumber()%></div>
-                <button class="delete-route-btn" data-route="<%=route.getRouteNumber()%>"><span class="glyphicon glyphicon-minus minus"></span></button>
+                <button class="delete-route-btn" data-route="<%=route.getId()%>"><span class="glyphicon glyphicon-minus minus"></span></button>
             </div>
             <%
                 }
