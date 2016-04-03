@@ -74,7 +74,7 @@ public class JsonParser {
             changedStop.setAddedTimes(addedTimes);
 
             List<StopTime> deletedTimes = parseTimesFromJson(stopJson.getJSONArray("deletedTime"));
-            changedStop.setDeletedTime(deletedTimes);
+            changedStop.setDeletedTimes(deletedTimes);
 
 
             changedSavingStops.add(changedStop);

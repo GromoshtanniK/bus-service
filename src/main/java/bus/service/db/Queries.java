@@ -1,6 +1,6 @@
 package bus.service.db;
 
-public abstract class Queries {
+public final class Queries {
     //route
     public static final String INSERT_ROUTE = "INSERT INTO bus_service.route (route_number) VALUES (?)";
     public static final String UPDATE_ROUTE = "UPDATE bus_service.route SET route_number = ? WHERE id = ?";

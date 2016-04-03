@@ -38,7 +38,7 @@ public class EditRoute {
         this.added = added;
     }
 
-    public List<ChangedStop> getChanged() {
+    public List<ChangedStop> getChangedRouteStops() {
         return changed;
     }
 

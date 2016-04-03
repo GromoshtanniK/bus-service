@@ -10,7 +10,7 @@ public class ChangedStop extends RouteStop {
 
     private boolean changedName;
     private boolean changedCords;
-    private List<StopTime> deletedTime = new ArrayList<StopTime>();
+    private List<StopTime> deletedTimes = new ArrayList<StopTime>();
     private List<StopTime> addedTimes = new ArrayList<StopTime>();
     private List<StopTime> changedTimes = new ArrayList<StopTime>();
 
@@ -30,12 +30,12 @@ public class ChangedStop extends RouteStop {
         this.changedCords = changedCords;
     }
 
-    public List<StopTime> getDeletedTime() {
-        return deletedTime;
+    public List<StopTime> getDeletedTimes() {
+        return deletedTimes;
     }
 
-    public void setDeletedTime(List<StopTime> deletedTime) {
-        this.deletedTime = deletedTime;
+    public void setDeletedTimes(List<StopTime> deletedTimes) {
+        this.deletedTimes = deletedTimes;
     }
 
     public List<StopTime> getAddedTimes() {
