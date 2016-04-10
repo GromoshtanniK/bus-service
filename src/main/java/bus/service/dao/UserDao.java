@@ -1,11 +1,14 @@
 package bus.service.dao;
 
 import bus.service.beans.User;
+import bus.service.db.ColumnNames;
 import bus.service.db.DB;
 import bus.service.db.Queries;
 import org.apache.commons.dbutils.QueryRunner;
+import org.apache.commons.dbutils.ResultSetHandler;
 import org.apache.commons.dbutils.handlers.ScalarHandler;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 /**
@@ -17,5 +20,22 @@ public class UserDao {
 
     public Long saveUser(User user) throws SQLException {
         return queryRunner.insert(Queries.INSERT_USER, new ScalarHandler<Long>(), user.getUserName(), user.getPassword(), user.getRole(), user.getEmail());
+    }
+
+    public User getUserByUsername(String userName) throws SQLException {
+        return queryRunner.query(Queries.SELECT_USER_BY_USERNAME, new ResultSetHandler<User>() {
+            public User handle(ResultSet resultSet) throws SQLException {
+                User user = null;
+                while (resultSet.next()) {
+                    user = new User();
+                    user.setId(resultSet.getLong(ColumnNames.ID_COLUMN));
+                    user.setUserName(resultSet.getString(ColumnNames.USER_USERNAME_COLUMN));
+                    user.setPassword(resultSet.getString(ColumnNames.USER_PASSWORD_COLUMN));
+                    user.setEmail(resultSet.getString(ColumnNames.USER_EMAIL_COLUMN));
+                    user.setRole(resultSet.getInt(ColumnNames.USER_ROLE_COLUMN));
+                }
+                return user;
+            }
+        }, userName);
     }
 }

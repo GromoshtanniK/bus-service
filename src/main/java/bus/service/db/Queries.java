@@ -32,4 +32,5 @@ public final class Queries {
 
     //user
     public static final String INSERT_USER = "INSERT INTO bus_service.user (username, password, role, email) VALUES (?, ?, ?, ?)";
+    public static final String SELECT_USER_BY_USERNAME = "SELECT * FROM bus_service.user WHERE username = ?";
 }

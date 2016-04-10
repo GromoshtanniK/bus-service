@@ -10,14 +10,6 @@ public class AuthenticationAndAuthorizationService {
 
     private UserDao userDao = new UserDao();
 
-    public boolean isValidCredentials(User user) {
-        if (user.getUserName().equals("admin") && user.getPassword().equals("password")) {
-            user.setRole(User.DISPATCHER);
-            return true;
-        }
-        return false;
-    }
-
     public void saveRegistrationUser(RegistrationUser registrationUser) {
         User user = new User();
         user.setUserName(registrationUser.getUserName());
@@ -29,5 +21,15 @@ public class AuthenticationAndAuthorizationService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+    }
+
+    public User getUserByUsername(String userName) {
+        User user = null;
+        try {
+            user =  userDao.getUserByUsername(userName);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return user;
     }
 }

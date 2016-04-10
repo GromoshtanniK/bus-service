@@ -27,13 +27,14 @@ public class LoginServlet extends HttpServlet {
     @Override
     protected void doPost( HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 
-        User user = getUserFromRequest(req);
         AuthenticationAndAuthorizationService service = new AuthenticationAndAuthorizationService();
+        User user = getUserFromRequest(req);
+        User userFromDb = service.getUserByUsername(user.getUserName());
 
-        if (service.isValidCredentials(user)) {
+        if (userFromDb != null && userFromDb.getPassword().equals(user.getPassword())) {
             HttpSession session = req.getSession();
-            session.setAttribute(SessionAttributes.USER, user);
-            redirectUser(resp, user);
+            session.setAttribute(SessionAttributes.USER, userFromDb);
+            redirectUser(resp, userFromDb);
         } else {
             resp.sendRedirect(Path.LOGIN_SERVLET + "?error=visible");
         }
