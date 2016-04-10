@@ -12,6 +12,7 @@ import java.util.List;
 
 public class EditRouteService {
 
+    EmailService emailService = new EmailService();
     RouteStopDao routeStopDao = new RouteStopDao();
     StopTimeDao stopTimeDao = new StopTimeDao();
 
@@ -19,6 +20,7 @@ public class EditRouteService {
         addRouteStops(editRoute.getAddedRouteStops());
         deleteRouteStops(editRoute.getDeletedStopRoutes());
         updateRouteStops(editRoute.getChangedRouteStops());
+        emailService.sendChangesEmail(editRoute);
     }
 
     private void deleteRouteStops(List<RouteStop> routeStops) {
