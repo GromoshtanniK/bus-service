@@ -6,6 +6,7 @@ public class User {
     public static final int REGISTERED_USER = 1;
     public static final int DISPATCHER = 2;
 
+    private long id;
     private String userName;
     private String password;
     private int role;
@@ -57,5 +58,13 @@ public class User {
 
     public boolean isDispatcher() {
         return role == DISPATCHER;
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public void setId(long id) {
+        this.id = id;
     }
 }

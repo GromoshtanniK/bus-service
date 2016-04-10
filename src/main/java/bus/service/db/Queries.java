@@ -29,4 +29,7 @@ public final class Queries {
     public static final String SELECT_STOP_TIME_BY_ID = "SELECT * FROM bus_service.stop_time WHERE id = ?";
     public static final String DELETE_STOP_TIME_BY_ID = "DELETE FROM bus_service.stop_time WHERE id = ?";
     public static final String DELETE_STOP_TIMES_BY_ROUTE_STOP_ID = "DELETE FROM bus_service.stop_time WHERE route_stop_id = ?";
+
+    //user
+    public static final String INSERT_USER = "INSERT INTO bus_service.user (username, password, role, email) VALUES (?, ?, ?, ?)";
 }

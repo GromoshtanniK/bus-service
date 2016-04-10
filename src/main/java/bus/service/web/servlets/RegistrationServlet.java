@@ -1,6 +1,7 @@
 package bus.service.web.servlets;
 
 import bus.service.beans.RegistrationUser;
+import bus.service.service.AuthenticationAndAuthorizationService;
 import bus.service.web.constants.Path;
 import bus.service.web.constants.RequestAttributes;
 
@@ -14,6 +15,8 @@ import java.io.IOException;
 @WebServlet(urlPatterns = Path.REGISTRATION_SERVLET)
 public class RegistrationServlet extends HttpServlet {
 
+    private AuthenticationAndAuthorizationService authenticationAndAuthorizationService = new AuthenticationAndAuthorizationService();
+
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         req.getRequestDispatcher(Path.REGISTRATION_JSP).forward(req, resp);
@@ -21,10 +24,11 @@ public class RegistrationServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        RegistrationUserValidation validation = new RegistrationUserValidation(getRegistrationUserFromRequest(req));
+        RegistrationUser registrationUser = getRegistrationUserFromRequest(req);
+        RegistrationUserValidation validation = new RegistrationUserValidation(registrationUser);
         if (validation.isValid()) {
             req.getRequestDispatcher(Path.SUCCESSFUL_REGISTRATION_JSP).forward(req, resp);
-            //TODO хуячим в базу
+            authenticationAndAuthorizationService.saveRegistrationUser(registrationUser);
         } else {
             resp.sendRedirect(Path.REGISTRATION_SERVLET + validation.getErrorParameters());
         }

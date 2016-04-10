@@ -28,7 +28,6 @@ public class StopTimeDao {
         queryRunner.update(Queries.UPDATE_STOP_TIME, stopTime.getHours(), stopTime.getMinutes(), stopTime.getId());
     }
 
-
     public List<StopTime> getStopTimesByRouteStopId(long id) throws SQLException {
         return queryRunner.query(Queries.SELECT_STOP_TIMES_BY_ROUTE_STOP, new ResultSetHandler<List<StopTime>>() {
             public List<StopTime> handle(ResultSet resultSet) throws SQLException {
