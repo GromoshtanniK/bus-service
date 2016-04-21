@@ -301,3 +301,21 @@ body {
     margin-left: 16px;
     position: absolute;
 }
+
+.content .btn-group ul.watching-dropdown-menu {
+    width: 175px;
+}
+
+.watching-dropdown-menu-label {
+    margin-bottom: 20px;
+}
+
+.watching-dropdown-li {
+    padding-left: 10px;
+}
+
+.watching-dropdown-menu li {
+    display: inline-block;
+    width: 100%;
+    cursor: pointer;
+}
