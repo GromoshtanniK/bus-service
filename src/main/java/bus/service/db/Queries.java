@@ -9,6 +9,8 @@ public final class Queries {
     public static final String SELECT_ROUTE_BY_ID = "SELECT * FROM bus_service.route WHERE id = ?";
     public static final String DELETE_ROUTE_BY_ID = "DELETE FROM bus_service.route WHERE id = ?";
     public static final String DELETE_ROUTE_BY_ROUTE_NUMBER = "DELETE FROM bus_service.route WHERE route_number = ?";
+    public static final String SELECT_NOT_LINKED_ROUTES_BY_USER_ID = "SELECT * FROM bus_service.route route JOIN route_user_sub rus ON rus.route_id = route.id WHERE rus.user_id <> ?";
+    public static final String SELECT_LINKED_ROUTES_BY_USER_ID = "SELECT * FROM bus_service.route route LEFT JOIN route_user_sub rus ON rus.route_id = route.id WHERE rus.user_id = ?";
 
     //route_stop
     public static final String INSERT_ROUTE_STOP = "INSERT INTO bus_service.route_stop " +

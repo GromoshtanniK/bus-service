@@ -1,4 +1,7 @@
 <%@ page import="bus.service.web.constants.Path" %>
+<%@ page import="bus.service.beans.Route" %>
+<%@ page import="java.util.List" %>
+<%@ page import="bus.service.web.constants.RequestAttributes" %>
 <%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html lang="en">
@@ -27,15 +30,39 @@
                 <span class="choose-route">Номер маршрута</span> <span class="caret"></span>
             </button>
             <ul class="dropdown-menu watching-dropdown-menu">
-                <li><span class="watching-dropdown-li" data-route="ROUTE_ID_1">123</span></li>
-                <!--TODO тут заменить ROUTE_ID и 123 (глянь как это сделано в index), в этот список выводятся роуты еще не добаленные, нужно сортировать по тем, которые не были добавленны пользователем-->
+                <%
+                    List<Route> routes = (List<Route>) request.getAttribute(RequestAttributes.NOT_LINKED_ROUTES);
+                    if (routes != null) {
+                %>
+                <%
+                    for (Route route : routes) {
+                %>
+                <li><a href="?data-route=<%=route.getRouteNumber()%>"><%=route.getRouteNumber()%></a></li>
+                <%
+                    }
+                %>
+                <%
+                    }
+                %>
             </ul>
         </div>
         <div class="routes">
             <div class="route">
-                <div class="route-number">321123</div>
-                <!--TODO тут заменить ROUTE_ID-->
-                <button class="delete-route-btn" data-route="ROUTE_ID_2"><span class="glyphicon glyphicon-minus minus"></span></button>
+                <%
+                    List<Route> linkedRoutes = (List<Route>) request.getAttribute(RequestAttributes.NOT_LINKED_ROUTES);
+                    if (linkedRoutes != null) {
+                %>
+                <%
+                    for (Route route : linkedRoutes) {
+                %>
+                <div class="route-number"><%=route.getRouteNumber()%></div>
+                <button class="delete-route-btn" data-route="<%=route.getRouteNumber()%>"><span class="glyphicon glyphicon-minus minus"></span></button>
+                <%
+                    }
+                %>
+                <%
+                    }
+                %>
             </div>
         </div>
     </div>

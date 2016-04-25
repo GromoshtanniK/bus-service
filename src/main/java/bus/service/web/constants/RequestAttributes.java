@@ -9,4 +9,6 @@ public final class RequestAttributes {
     public static final String ROUTE_NUMBER = "route";
     public static final String ROUTE = "route";
     public static final String ROUTES = "routes";
+    public static final String NOT_LINKED_ROUTES = "not_linked_routes";
+    public static final String LINKED_ROUTES = "linked_routes";
 }

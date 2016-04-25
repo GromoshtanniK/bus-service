@@ -85,4 +85,24 @@ public class RouteService {
             //todo log
         }
     }
+
+    public List<Route> getNotLikedRoutesByUserId(long id) {
+        List<Route> routes = null;
+        try {
+            routes = routeDao.getNotLikedRoutesByUserId(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return routes;
+    }
+
+    public List<Route> getLikedRoutesByUserId(long id) {
+        List<Route> routes = null;
+        try {
+            routes = routeDao.getLikedRoutesByUserId(id);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return routes;
+    }
 }
