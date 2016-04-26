@@ -1,6 +1,6 @@
 $(function(){
     $(".watching-dropdown-menu").on("click", "li", function(){
-        var routeId = $(this).find("span").data("route");
+        var routeId = $(this).find("a").data("route");
         $.post({
             url: "/profile",
             data: {

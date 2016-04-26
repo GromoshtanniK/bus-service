@@ -31,10 +31,10 @@
             </button>
             <ul class="dropdown-menu watching-dropdown-menu">
                 <%
-                    List<Route> routes = (List<Route>) request.getAttribute(RequestAttributes.LINKED_ROUTES);
+                    List<Route> routes = (List<Route>) request.getAttribute(RequestAttributes.NOT_LINKED_ROUTES);
                     for (Route route : routes) {
                 %>
-                    <li><span class="watching-dropdown-li" data-route="<%=route.getId()%>"><%=route.getRouteNumber()%></span></li>
+                    <li><a data-route="<%=route.getId()%>"><%=route.getRouteNumber()%></a></li>
                 <%
                     }
                 %>
