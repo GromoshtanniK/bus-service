@@ -30,23 +30,15 @@ public class ProfileServlet extends HttpServlet {
 
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        String addRouteNumber = req.getParameter("add");
-        if (addRouteNumber != null) {
-            add(addRouteNumber);
+        User user = (User) req.getSession().getAttribute(SessionAttributes.USER);
+        String addRouteId = req.getParameter("add");
+        if (addRouteId != null) {
+            routeService.addRouteUserSub(Long.valueOf(addRouteId), user.getId());
         }
 
         String deleteRouteId = req.getParameter("delete");
         if (deleteRouteId != null) {
-            delete(deleteRouteId);
+            routeService.deleteRouteUserSub(Long.valueOf(deleteRouteId), user.getId());
         }
-    }
-
-    private void delete(String routeId) {
-        System.out.println(routeId);
-    }
-
-
-    private void add(String routeId) {
-        System.out.println(routeId);
     }
 }

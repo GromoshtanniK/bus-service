@@ -116,4 +116,20 @@ public class RouteService {
         }
         return routes;
     }
+
+    public void addRouteUserSub(long routeId, long userId) {
+        try {
+            routeDao.addRouteUserSub(routeId, userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
+
+    public void deleteRouteUserSub(long routeId, long userId) {
+        try {
+            routeDao.deleteRouteUserSub(routeId, userId);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+    }
 }

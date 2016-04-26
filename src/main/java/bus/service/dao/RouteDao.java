@@ -73,4 +73,12 @@ public class RouteDao {
             }
         }, userId);
     }
+
+    public void addRouteUserSub(long routeId, long userId) throws SQLException {
+        queryRunner.update(Queries.INSERT_INTO_ROUTE_USER_SUB, routeId, userId);
+    }
+
+    public void deleteRouteUserSub(long routeId, long userId) throws SQLException {
+        queryRunner.update(Queries.DELETE_FROM_ROUTE_USER_SUB, routeId, userId);
+    }
 }

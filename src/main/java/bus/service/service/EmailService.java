@@ -1,6 +1,7 @@
 package bus.service.service;
 
 import bus.service.beans.RouteStop;
+import bus.service.dao.UserDao;
 import bus.service.json.EditRoute;
 import org.codemonkey.simplejavamail.Mailer;
 import org.codemonkey.simplejavamail.TransportStrategy;
@@ -10,6 +11,8 @@ import javax.mail.Message;
 import java.text.MessageFormat;
 
 public class EmailService {
+
+    private UserDao userDao = new UserDao();
 
     public void sendChangesEmail(EditRoute editRoute) {
         String text = generateTextMessage(editRoute);
