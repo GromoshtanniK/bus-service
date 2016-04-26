@@ -37,7 +37,7 @@
                 <%
                     for (Route route : routes) {
                 %>
-                <li><a href="?data-route=<%=route.getRouteNumber()%>"><%=route.getRouteNumber()%></a></li>
+                <li><a href="?data-route=<%=route.getId()%>"><%=route.getRouteNumber()%></a></li>
                 <%
                     }
                 %>
@@ -49,13 +49,13 @@
         <div class="routes">
             <div class="route">
                 <%
-                    List<Route> linkedRoutes = (List<Route>) request.getAttribute(RequestAttributes.NOT_LINKED_ROUTES);
+                    List<Route> linkedRoutes = (List<Route>) request.getAttribute(RequestAttributes.LINKED_ROUTES);
                     if (linkedRoutes != null) {
                 %>
                 <%
                     for (Route route : linkedRoutes) {
                 %>
-                <div class="route-number"><%=route.getRouteNumber()%></div>
+                <div class="route-number"><%=route.getId()%></div>
                 <button class="delete-route-btn" data-route="<%=route.getRouteNumber()%>"><span class="glyphicon glyphicon-minus minus"></span></button>
                 <%
                     }

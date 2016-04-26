@@ -8,6 +8,7 @@ import bus.service.dao.RouteStopDao;
 import bus.service.dao.StopTimeDao;
 
 import java.sql.SQLException;
+import java.util.Iterator;
 import java.util.List;
 
 public class RouteService {
@@ -86,20 +87,30 @@ public class RouteService {
         }
     }
 
-    public List<Route> getNotLikedRoutesByUserId(long id) {
+    public List<Route> getNotLinkedRoutesByUserId(long id) {
         List<Route> routes = null;
         try {
-            routes = routeDao.getNotLikedRoutesByUserId(id);
+            routes = routeDao.getAllRoutes();
+            List<Route> linkedRoutesByUserId = routeDao.getLinkedRoutesByUserId(id);
+            Iterator<Route> iterator = routes.iterator();
+            while (iterator.hasNext()) {
+                Route curRoute = iterator.next();
+                for (Route linkedRoute : linkedRoutesByUserId) {
+                    if (curRoute.getRouteNumber() == linkedRoute.getRouteNumber()) {
+                        iterator.remove();
+                    }
+                }
+            }
         } catch (SQLException e) {
             e.printStackTrace();
         }
         return routes;
     }
 
-    public List<Route> getLikedRoutesByUserId(long id) {
+    public List<Route> getLinkedRoutesByUserId(long id) {
         List<Route> routes = null;
         try {
-            routes = routeDao.getLikedRoutesByUserId(id);
+            routes = routeDao.getLinkedRoutesByUserId(id);
         } catch (SQLException e) {
             e.printStackTrace();
         }

@@ -23,8 +23,8 @@ public class ProfileServlet extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         User user = (User) req.getSession().getAttribute(SessionAttributes.USER);
-        req.setAttribute(RequestAttributes.LINKED_ROUTES, routeService.getLikedRoutesByUserId(user.getId()));
-        req.setAttribute(RequestAttributes.NOT_LINKED_ROUTES, routeService.getLikedRoutesByUserId(user.getId()));
+        req.setAttribute(RequestAttributes.LINKED_ROUTES, routeService.getLinkedRoutesByUserId(user.getId()));
+        req.setAttribute(RequestAttributes.NOT_LINKED_ROUTES, routeService.getNotLinkedRoutesByUserId(user.getId()));
         req.getRequestDispatcher(Path.PROFILE_JSP).forward(req, resp);
     }
 

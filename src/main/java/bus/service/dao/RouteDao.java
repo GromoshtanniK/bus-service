@@ -59,22 +59,7 @@ public class RouteDao {
         queryRunner.update(Queries.DELETE_ROUTE_BY_ID, routeId);
     }
 
-    public List<Route> getNotLikedRoutesByUserId(long userId) throws SQLException {
-        return  queryRunner.query(Queries.SELECT_NOT_LINKED_ROUTES_BY_USER_ID, new ResultSetHandler<List<Route>>() {
-            public List<Route> handle(ResultSet resultSet) throws SQLException {
-                List<Route> routes = new ArrayList<Route>();
-                while (resultSet.next()) {
-                    Route route = new Route();
-                    route.setId(resultSet.getLong(ColumnNames.ID_COLUMN));
-                    route.setRouteNumber(resultSet.getInt(ColumnNames.ROUTE_NUMBER_COLUMN));
-                    routes.add(route);
-                }
-                return routes;
-            }
-        }, userId);
-    }
-
-    public List<Route> getLikedRoutesByUserId(long userId) throws SQLException {
+    public List<Route> getLinkedRoutesByUserId(long userId) throws SQLException {
         return  queryRunner.query(Queries.SELECT_LINKED_ROUTES_BY_USER_ID, new ResultSetHandler<List<Route>>() {
             public List<Route> handle(ResultSet resultSet) throws SQLException {
                 List<Route> routes = new ArrayList<Route>();
