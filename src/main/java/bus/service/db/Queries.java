@@ -37,5 +37,5 @@ public final class Queries {
     public static final String INSERT_USER = "INSERT INTO bus_service.user (username, password, role, email) VALUES (?, ?, ?, ?)";
     public static final String SELECT_USER_BY_USERNAME = "SELECT * FROM bus_service.user WHERE username = ?";
     public static final String SELECT_USER_BY_ID = "SELECT * FROM bus_service.user WHERE id = ?";
-    public static final String SELECT_LINKED_USERS_BY_ROUTE_NUMBER = "SELECT * FROM bus_service.user user JOIN route_user_sub rus ON rus.user_id = user.id JOIN route r ON r.route_number = ?";
+    public static final String SELECT_LINKED_USERS_BY_ROUTE_NUMBER = "SELECT * FROM bus_service.user user JOIN route_user_sub rus ON rus.user_id = user.id JOIN route r ON r.id = rus.route_id AND r.route_number = ?";
 }

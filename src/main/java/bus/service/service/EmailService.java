@@ -22,7 +22,6 @@ public class EmailService {
             List<User> linkedUsersByRouteNumber = userDao.getLinkedUsersByRouteNumber(editRoute.getRouteNumber());
             for (User user : linkedUsersByRouteNumber) {
                 sendEmail(user.getEmail(), "Изменение в маршруте " + editRoute.getRouteNumber(), text);
-
             }
         } catch (SQLException e) {
             e.printStackTrace();
