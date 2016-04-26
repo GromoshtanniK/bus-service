@@ -31,39 +31,27 @@
             </button>
             <ul class="dropdown-menu watching-dropdown-menu">
                 <%
-                    List<Route> routes = (List<Route>) request.getAttribute(RequestAttributes.NOT_LINKED_ROUTES);
-                    if (routes != null) {
-                %>
-                <%
+                    List<Route> routes = (List<Route>) request.getAttribute(RequestAttributes.LINKED_ROUTES);
                     for (Route route : routes) {
                 %>
-                <li><a href="?data-route=<%=route.getId()%>"><%=route.getRouteNumber()%></a></li>
-                <%
-                    }
-                %>
+                    <li><span class="watching-dropdown-li" data-route="<%=route.getId()%>"><%=route.getRouteNumber()%></span></li>
                 <%
                     }
                 %>
             </ul>
         </div>
         <div class="routes">
+            <%
+                List<Route> linkedRoutes = (List<Route>) request.getAttribute(RequestAttributes.LINKED_ROUTES);
+                for (Route route : linkedRoutes) {
+            %>
             <div class="route">
-                <%
-                    List<Route> linkedRoutes = (List<Route>) request.getAttribute(RequestAttributes.LINKED_ROUTES);
-                    if (linkedRoutes != null) {
-                %>
-                <%
-                    for (Route route : linkedRoutes) {
-                %>
-                <div class="route-number"><%=route.getId()%></div>
-                <button class="delete-route-btn" data-route="<%=route.getRouteNumber()%>"><span class="glyphicon glyphicon-minus minus"></span></button>
-                <%
-                    }
-                %>
-                <%
-                    }
-                %>
+                <div class="route-number"><%=route.getRouteNumber()%></div>
+                <button class="delete-route-btn" data-route="<%=route.getId()%>"><span class="glyphicon glyphicon-minus minus"></span></button>
             </div>
+            <%
+                }
+            %>
         </div>
     </div>
 
