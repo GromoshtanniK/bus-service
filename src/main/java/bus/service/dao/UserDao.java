@@ -10,6 +10,8 @@ import org.apache.commons.dbutils.handlers.ScalarHandler;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  * Created by andrey on 10/04/16.
@@ -37,5 +39,23 @@ public class UserDao {
                 return user;
             }
         }, userName);
+    }
+
+    public List<User> getLinkedUsersByRouteNumber(int routeNumber) throws SQLException {
+        return queryRunner.query(Queries.SELECT_LINKED_USERS_BY_ROUTE_NUMBER, new ResultSetHandler<List<User>>() {
+            public List<User> handle(ResultSet resultSet) throws SQLException {
+                List<User> users = new ArrayList<User>();
+                while (resultSet.next()) {
+                    User user = new User();
+                    user.setId(resultSet.getLong(ColumnNames.ID_COLUMN));
+                    user.setUserName(resultSet.getString(ColumnNames.USER_USERNAME_COLUMN));
+                    user.setPassword(resultSet.getString(ColumnNames.USER_PASSWORD_COLUMN));
+                    user.setEmail(resultSet.getString(ColumnNames.USER_EMAIL_COLUMN));
+                    user.setRole(resultSet.getInt(ColumnNames.USER_ROLE_COLUMN));
+                    users.add(user);
+                }
+                return users;
+            }
+        }, routeNumber);
     }
 }

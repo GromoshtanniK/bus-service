@@ -1,6 +1,7 @@
 package bus.service.service;
 
 import bus.service.beans.RouteStop;
+import bus.service.beans.User;
 import bus.service.dao.UserDao;
 import bus.service.json.EditRoute;
 import org.codemonkey.simplejavamail.Mailer;
@@ -8,7 +9,8 @@ import org.codemonkey.simplejavamail.TransportStrategy;
 import org.codemonkey.simplejavamail.email.Email;
 
 import javax.mail.Message;
-import java.text.MessageFormat;
+import java.sql.SQLException;
+import java.util.List;
 
 public class EmailService {
 
@@ -16,10 +18,15 @@ public class EmailService {
 
     public void sendChangesEmail(EditRoute editRoute) {
         String text = generateTextMessage(editRoute);
+        try {
+            List<User> linkedUsersByRouteNumber = userDao.getLinkedUsersByRouteNumber(editRoute.getRouteNumber());
+            for (User user : linkedUsersByRouteNumber) {
+                sendEmail(user.getEmail(), "Изменение в маршруте " + editRoute.getRouteNumber(), text);
 
-        //TODO Цикл из пользователей с номером маршрута
-
-        sendEmail("gromoshtannik@gmail.com", "Изменение в маршруте " + editRoute.getRouteNumber(), text);
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 
     private String generateTextMessage(EditRoute editRoute) {
