@@ -23,7 +23,7 @@ public class RouteService {
         }
     }
 
-    public void createRouteByRouteNumber(int routeNumber) {
+    public Route createRouteByRouteNumber(int routeNumber) {
         RouteDao routeDao = new RouteDao();
         Route route = new Route();
         route.setRouteNumber(routeNumber);
@@ -32,6 +32,7 @@ public class RouteService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return route;
     }
 
 
@@ -55,14 +56,17 @@ public class RouteService {
 
         try {
             route = routeDao.getRouteByRouteNumber(routeNumber);
-            List<RouteStop> routeStops = routeStopDao.getRouteStopsByRoute(route);
+            if (route != null) {
+                List<RouteStop> routeStops = routeStopDao.getRouteStopsByRoute(route);
 
-            for (RouteStop routeStop : routeStops) {
-                List<StopTime> stopTimes = stopTimeDao.getStopTimesByRouteStop(routeStop);
-                routeStop.setStopTimes(stopTimes);
+                for (RouteStop routeStop : routeStops) {
+                    List<StopTime> stopTimes = stopTimeDao.getStopTimesByRouteStop(routeStop);
+                    routeStop.setStopTimes(stopTimes);
+                }
+
+                route.setStops(routeStops);
             }
 
-            route.setStops(routeStops);
         } catch (SQLException e) {
             //todo log
         }
