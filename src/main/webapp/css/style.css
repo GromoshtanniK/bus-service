@@ -193,8 +193,8 @@ body {
 .login-error {
     color: red;
     position: absolute;
-    top: 212px;
-    right: 354px;
+    top: 260px;
+    right: 505px;
     display: none;
 }
 
