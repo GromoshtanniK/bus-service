@@ -10,7 +10,7 @@ public class AuthenticationAndAuthorizationService {
 
     private UserDao userDao = new UserDao();
 
-    public void saveRegistrationUser(RegistrationUser registrationUser) {
+    public User saveRegistrationUser(RegistrationUser registrationUser) {
         User user = new User();
         user.setUserName(registrationUser.getUserName());
         user.setPassword(registrationUser.getPassword());
@@ -21,6 +21,7 @@ public class AuthenticationAndAuthorizationService {
         } catch (SQLException e) {
             e.printStackTrace();
         }
+        return user;
     }
 
     public User getUserByUsername(String userName) {
@@ -31,5 +32,13 @@ public class AuthenticationAndAuthorizationService {
             e.printStackTrace();
         }
         return user;
+    }
+
+    public void deleteUser(User user) {
+        try {
+            userDao.deleteUserById(user.getId());
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
     }
 }

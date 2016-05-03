@@ -58,4 +58,8 @@ public class UserDao {
             }
         }, routeNumber);
     }
+
+    public void deleteUserById(long id) throws SQLException {
+        queryRunner.update(Queries.DELETE_USER_BY_ID, id);
+    }
 }
