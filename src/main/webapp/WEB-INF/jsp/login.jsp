@@ -25,13 +25,13 @@
                 <div class="control-group">
                     <!-- Username -->
                     <label class="control-label" for="username">Имя пользователя</label>
-                    <input type="text" class="form-control" id="username" name="username" value="admin">
+                    <input type="text" class="form-control" id="username" name="username">
                 </div>
 
                 <div class="control-group">
                     <!-- Password-->
                     <label class="control-label" for="password">Пароль</label>
-                    <input type="password" class="form-control" id="password" name="password" value="password">
+                    <input type="password" class="form-control" id="password" name="password">
                 </div>
 
                 <div class="control-group align-center">
