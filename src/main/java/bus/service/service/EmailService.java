@@ -1,8 +1,10 @@
 package bus.service.service;
 
 import bus.service.beans.RouteStop;
+import bus.service.beans.StopTime;
 import bus.service.beans.User;
 import bus.service.dao.UserDao;
+import bus.service.json.ChangedStop;
 import bus.service.json.EditRoute;
 import org.codemonkey.simplejavamail.Mailer;
 import org.codemonkey.simplejavamail.TransportStrategy;
@@ -44,6 +46,31 @@ public class EmailService {
             added += routeStop.getStopName() + "\n";
         }
 
+        String changed = "\n\nБыли изменены следующие остановки:\n";
+
+        for (ChangedStop changedStop : editRoute.getChangedRouteStops()) {
+
+            String changedText = "\nОстановка " + changedStop.getStopName() + ":\n";
+
+            if (changedStop.isChangedCords()) {
+                changedText += "Измелись координаты\n";
+            }
+
+            for (StopTime stopTime : changedStop.getAddedTimes()) {
+                changedText += "Добавилось время " + stopTime.getHours() +" : " + stopTime.getMinutes() + "\n";
+            }
+
+            for (StopTime stopTime : changedStop.getChangedTimes()) {
+                changedText += "Изменилось время на " + stopTime.getHours() +" : " + stopTime.getMinutes() + "\n";
+            }
+
+            for (StopTime stopTime : changedStop.getDeletedTimes()) {
+                changedText += "Удалилось время " + stopTime.getHours() +" : " + stopTime.getMinutes() + "\n";
+            }
+
+            changed += changedText;
+        }
+
         String text = title;
 
         if (!editRoute.getDeletedStopRoutes().isEmpty()) {
@@ -52,6 +79,10 @@ public class EmailService {
 
         if (!editRoute.getAddedRouteStops().isEmpty()) {
             text += added;
+        }
+
+        if (!editRoute.getChangedRouteStops().isEmpty()) {
+            text += changed;
         }
 
         return text;

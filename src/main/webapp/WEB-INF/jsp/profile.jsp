@@ -15,7 +15,7 @@
     <script src="js/profileScript.js"></script>
     <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <meta charset="UTF-8">
-    <title>Routes</title>
+    <title>Профиль</title>
 </head>
 <body>
 <div class="wrapper">

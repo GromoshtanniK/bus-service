@@ -17,7 +17,7 @@
     <script src="http://api-maps.yandex.ru/2.1/?lang=ru_RU" type="text/javascript"></script>
     <script src="js/indexScript.js"></script>
     <meta charset="UTF-8">
-    <title>Routes</title>
+    <title>BUS SERVICE</title>
 </head>
 <body>
 <div class="wrapper">

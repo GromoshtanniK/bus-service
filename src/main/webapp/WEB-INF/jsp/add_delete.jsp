@@ -14,7 +14,7 @@
     <script src="js/bootstrap.js"></script>
     <script src="js/addDeleteRouteScript.js"></script>
     <meta charset="UTF-8">
-    <title>Routes</title>
+    <title>Добавление/Удаление маршрутов</title>
 </head>
 <body>
 <div class="wrapper">
