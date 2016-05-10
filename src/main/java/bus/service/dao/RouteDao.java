@@ -57,6 +57,7 @@ public class RouteDao {
 
     public void deleteRouteById(long routeId) throws SQLException {
         queryRunner.update(Queries.DELETE_ROUTE_BY_ID, routeId);
+        queryRunner.update(Queries.DELETE_FROM_ROUTE_USER_SUB_BY_ROUTE_ID, routeId);
     }
 
     public List<Route> getLinkedRoutesByUserId(long userId) throws SQLException {

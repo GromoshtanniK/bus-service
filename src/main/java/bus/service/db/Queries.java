@@ -12,6 +12,7 @@ public final class Queries {
     public static final String SELECT_LINKED_ROUTES_BY_USER_ID = "SELECT * FROM bus_service.route route LEFT JOIN route_user_sub rus ON rus.route_id = route.id WHERE rus.user_id = ?";
     public static final String INSERT_INTO_ROUTE_USER_SUB = "INSERT INTO bus_service.route_user_sub (route_id, user_id) VALUES (?, ?)";
     public static final String DELETE_FROM_ROUTE_USER_SUB = "DELETE FROM bus_service.route_user_sub WHERE route_id = ? AND user_id = ?";
+    public static final String DELETE_FROM_ROUTE_USER_SUB_BY_ROUTE_ID = "DELETE FROM bus_service.route_user_sub WHERE route_id = ?";
 
     //route_stop
     public static final String INSERT_ROUTE_STOP = "INSERT INTO bus_service.route_stop " +
